@@ -261,14 +261,67 @@
 	background-color: #FFF;
 }
 
-.go_stats_body_list{
+#go_stats_body_list{
 	display: inline-block;
-	width: 30%;
+	width: 31%;
 	height: 100%;
 	float: left;
 	list-style-type: none;
 	margin: 0px 1.5% 0px 0px !important;
 	overflow-y: auto;
+	text-align: center;
+	border-collapse: collapse;
+}
+
+#go_stats_body_list td {
+   border: 1px solid grey;
+   padding: 4px;
+   background-color: white;
+   text-align: center;
+   width: 100%;
+   border-collapse: collapse;
+}
+
+#go_stats_body_list th {
+   border: 1px solid grey;
+   padding: 4px;
+   background-color: white;
+   text-align: center;
+   border-collapse: collapse;
+   width: 100%;
+}
+
+#go_stats_body_list_minutes{
+	width: 100%;
+	float: left;
+	list-style-type: none;
+	overflow-y: auto;
+	text-align: center;
+	border-collapse: collapse;
+}
+
+#go_stats_body_list_minutes td {
+   border: 1px solid grey;
+   padding: 4px;
+   background-color: white;
+   text-align: center;
+   border-collapse: collapse;
+}
+
+#go_stats_leaderboard_table td {
+	border: 1px solid grey;
+   background-color: white;
+   border-collapse: collapse;
+   text-align: center;
+}
+
+#go_stats_leaderboard_table {
+	float: left; 
+   	width: 24%;
+    margin-right: 10px;"
+    overflow-y: auto;
+	text-align: center;
+	border-collapse: collapse;
 }
 
 #go_stats_body .go_stats_body_list:last-of-type{
