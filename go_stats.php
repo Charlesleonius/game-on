@@ -401,6 +401,8 @@ function go_stats_rewards_list () {
  	 <br style="clear: left;" />
 	</div>
 	<table id='go_stats_body_list'>
+	<th>Title</th>
+      	<th>Amount</th>
 		<?php
 			foreach ($rewards as $reward) {
 				$reward_id = $reward->post_id;
@@ -418,6 +420,8 @@ function go_stats_rewards_list () {
 		?>
 	</table>
 	<table  id='go_stats_body_list'>
+	<th>Title</th>
+      	<th>Amount</th>
 		<?php
 			foreach ($rewards as $reward) {
 				$reward_id = $reward->post_id;
@@ -435,6 +439,8 @@ function go_stats_rewards_list () {
 		?>
 	</table>
 	<table id='go_stats_body_list'>
+	<th>Title</th>
+      	<th>Amount</th>
 		<?php
 			foreach ($rewards as $reward) {
 				$reward_id = $reward->post_id;
@@ -465,7 +471,10 @@ function go_stats_minutes_list () {
 	}
 	$minutes = $wpdb->get_results($wpdb->prepare("SELECT * FROM {$go_table_name} WHERE uid = %d AND (minutes != %d) ORDER BY id DESC", $user_id, 0)); 
 	?>
-	<table id='go_stats_body_list_minutes'>
+	<table id='go_stats_body_list_minutes' style="width: 99%">
+	<th>Title</th>
+	<th>Timestamp</th>
+      	<th>Amount</th>
 		<?php 
 			foreach ($minutes as $minute) {
 				?>

@@ -300,6 +300,14 @@
 	border-collapse: collapse;
 }
 
+#go_stats_body_list_minutes th {
+   border: 1px solid grey;
+   padding: 4px;
+   background-color: white;
+   text-align: center;
+   border-collapse: collapse;
+}
+
 #go_stats_body_list_minutes td {
    border: 1px solid grey;
    padding: 4px;
