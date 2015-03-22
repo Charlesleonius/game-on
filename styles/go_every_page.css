@@ -32,17 +32,17 @@
 }
 
 #go_admin_bar_progress_bar_border {
-	height:15px;
+	height:16px;
 	width:120px;
-	border:thin grey solid;
+	border:thin white solid;
 	-moz-border-radius: 2em 2em 2em 2em;
-	border-radius: 2em 2em 2em 2em;
+	margin-top: 2px;
 }
 
 #go_admin_bar_hitpoint_bar_border {
-	height:15px;
+	height:16px;
     width:120px;
-    border:thin grey solid;
+    border:1px white solid;
     -moz-border-radius: 2em 2em 2em 2em;
     border-radius: 2em 2em 2em 2em;
 }
@@ -68,7 +68,7 @@ ul#wp-admin-bar-go_add-default.ab-submenu{
 }
 
 #points_needed_to_level_up:hover{
-	color:black;
+	color: white;
 }
 
 .go_admin_bar_text {
@@ -82,24 +82,20 @@ ul#wp-admin-bar-go_add-default.ab-submenu{
 }
 
 .progress_bar{
-	height:15px !important;
-	-moz-border-radius: 2em 2em 2em 2em !important;
-	border-radius: 2em 2em 2em 2em !important;
+	height:16px !important;
 	background-color: #ff6600;
 }
 
 #go_messages_bar{
 	background-color: red;
-	border: 2px solid white;
-	border-radius: 12px;
+	border: 1px solid white;
 	box-shadow: 1px 1px 1px black;
 	color: white;
-	font: bold 15px/13px Helvetica, Verdana, Tahoma;
 	height: 16px;
-	padding: 0px 1px 0px 1px;
 	text-align: center;
 	min-width: 14px;
-	line-height:16px;
+	line-height:17px;
+	margin-top: 2px;
 }
 
 .go_messages_anchor {
@@ -291,6 +287,10 @@ input.go_test_field_rm {
 	border-color: #DDD;	
 }
 
+.cmb_id_go_mta_time_modifier td input{
+	width: 30px;
+}
+
 .go_task_settings_accordion{
 	font-size:16px;
 	border-style:solid;
@@ -439,8 +439,22 @@ input.go_current {
 	color: #000 !important;
 }
 
-.condensed  {
+.condensed {
 	padding: 7px !important;
+}
+
+#go_future_notification { 
+	color: red;
+}
+
+#go_future_notification_task_name { 
+	font-weight: bold;
+	color: black !important;
+}
+
+#go_task_timer{
+	color: red;
+	font-weight: bold;
 }
 
 /* Tasks Style | Front-end */
@@ -538,4 +552,149 @@ input#go_pass_lock:-moz-placeholder {
 	background-color: white;
 	z-index: 999999;
 	padding: 10px 10px 10px 10px;
+}
+
+div.dataTables_wrapper {
+	background-color: #FFF;
+}
+
+div.dataTables_length {
+	float: left;
+}
+
+div.dataTables_filter {
+	float: right;
+}
+
+div.dataTables_info {
+	padding: 9px 6px 6px 6px;
+	float: left;
+}
+
+div.dataTables_paginate {
+	float: right;
+}
+
+div.dataTables_length,
+div.dataTables_filter,
+div.dataTables_paginate {
+	padding: 6px;
+}
+
+/* Self clearing - http://www.webtoolkit.info/css-clearfix.html */
+.dataTables_wrapper:after {
+	content: ".";
+	display: block;
+	clear: both;
+	visibility: hidden;
+	line-height: 0;
+	height: 0;
+}
+ 
+html[xmlns] .dataTables_wrapper {
+	display: block;
+}
+ 
+* html .dataTables_wrapper {
+	height: 1%;
+}
+
+
+/*
+ * Table styles
+ */
+table.pretty {
+	width: 100% !important;
+	clear: both;
+}
+
+table.pretty td,
+table.pretty th {
+	padding: 5px;
+	border: 1px solid #fff;
+	font-size: 12px;
+}
+
+/* Header cells */
+table.pretty thead th {
+	text-align: center;
+	background: #F4F4F4;
+	font-size: 14px;
+}
+
+/* Body cells */
+table.pretty tbody th {
+	text-align: left;
+	background: #F4F4F4;
+}
+	
+table.pretty tbody td {
+	text-align: center;
+	background: #F4F4F4;
+}
+
+table.pretty tbody tr.odd td { 
+	background: #F4F4F4;
+}
+
+/* Footer cells */	
+table.pretty tfoot th {
+	background: #F4F4F4;
+	text-align: left;
+}
+	
+table.pretty tfoot td {
+	background: #F4F4F4;
+	text-align: center;
+	font-weight: bold;
+}
+
+/*
+ * Pagination
+ */
+a.paginate_button,
+a.paginate_active {
+	display: inline-block;
+	background-color: #608995;
+	padding: 2px 6px;
+	margin-left: 2px;
+	cursor: pointer;
+	*cursor: hand;
+}
+
+a.paginate_active {
+	background-color: transparent;
+	border: 1px solid black;
+}
+
+a.paginate_button_disabled {
+	color: #3d6672;
+}
+
+.paging_full_numbers a:active {
+	outline: none
+}
+
+.paging_full_numbers a:hover {
+	text-decoration: none;
+}
+
+div.dataTables_paginate span>a {
+	width: 15px;
+	text-align: center;
+}
+
+/*
+ * Sorting
+ */
+table.pretty thead th.sorting_asc {
+	background: #E2E2E2 url('images/sort_asc.png') no-repeat right center;
+}
+
+table.pretty thead th.sorting_desc {
+	background: #F4F4F4 url('images/sort_desc.png') no-repeat right center;
+}
+
+table.pretty thead th.sorting {
+	background: #E2E2E2 url('images/sort_both.png') no-repeat right center;
 }

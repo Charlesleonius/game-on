@@ -323,7 +323,7 @@ function go_stats_item_list () {
 	 <div style="float: left; width: 33%;"><strong>SOLD</strong></div>
  	 <br style="clear: left;" />
 	</div>
-	<table id="go_stats_body_list">
+	<table  id="go_clipboard_table" class="stats" style="width: 33%; float: left; text-align: center;">
 	<thead>
 		<tr>
       	<th>Title</th>
@@ -352,7 +352,7 @@ function go_stats_item_list () {
 		?>
 	</tbody>	
 	</table>
-	<table id="go_stats_body_list" >
+	<table  id="go_clipboard_table" class="stats" style="width: 33%; float: left; text-align: center;">
 		<tr>
       	<th>Title</th>
       	<th>Amount</th>
@@ -400,7 +400,7 @@ function go_stats_rewards_list () {
 	 <div style="float: left; width: 33%;"><strong><?php echo strtoupper(go_return_options('go_bonus_currency_name'));?></strong></div>
  	 <br style="clear: left;" />
 	</div>
-	<table id='go_stats_body_list'>
+	<table  id="go_clipboard_table" class="stats" style="width: 33%; float: left; text-align: center;">
 	<th>Title</th>
       	<th>Amount</th>
 		<?php
@@ -419,7 +419,7 @@ function go_stats_rewards_list () {
 			}
 		?>
 	</table>
-	<table  id='go_stats_body_list'>
+	<table  id="go_clipboard_table" class="stats" style="width: 33%; float: left; text-align: center;">
 	<th>Title</th>
       	<th>Amount</th>
 		<?php
@@ -438,7 +438,7 @@ function go_stats_rewards_list () {
 			}
 		?>
 	</table>
-	<table id='go_stats_body_list'>
+	<table  id="go_clipboard_table" class="stats" style="width: 33%; float: left; text-align: center;">
 	<th>Title</th>
       	<th>Amount</th>
 		<?php
@@ -471,7 +471,7 @@ function go_stats_minutes_list () {
 	}
 	$minutes = $wpdb->get_results($wpdb->prepare("SELECT * FROM {$go_table_name} WHERE uid = %d AND (minutes != %d) ORDER BY id DESC", $user_id, 0)); 
 	?>
-	<table id='go_stats_body_list_minutes' style="width: 99%">
+	<table  id="go_clipboard_table" class="stats" style="width: 99%; text-align: center;">
 	<th>Title</th>
 	<th>Timestamp</th>
       	<th>Amount</th>
@@ -501,7 +501,10 @@ function go_stats_penalties_list () {
 	}
 	$penalties = $wpdb->get_results($wpdb->prepare("SELECT * FROM {$go_table_name} WHERE uid = %d AND (penalty != %d) ORDER BY id DESC", $user_id, 0)); 
 	?>
-	<table id='go_stats_body_list_minutes'>
+	<table  id="go_clipboard_table" class="stats" style="width: 99%; text-align: center;">
+	<th>Title</th>
+	<th>Timestamp</th>
+    <th>Amount</th>
 		<?php 
 			foreach ($penalties as $penalty) {
 				?>
@@ -663,28 +666,28 @@ function go_stats_leaderboard () {
  	 <br style="clear: left;" />
 	</div>
 	<div style="width: 100%;">
-	<table  id="go_stats_leaderboard_table">
+	<table  id="go_clipboard_table" class="stats" style="width: 25%; float: left; text-align: center;">
 		<?php 
 		$counter = 1;
 		$users_points = $wpdb->get_results("SELECT uid FROM {$go_totals_table_name} ORDER BY CAST(points as signed) DESC");
 		go_return_user_leaderboard($users_points, $class_a_choice, $focuses, 'points', $counter)
 		?>
 	</table>
-	<table  id="go_stats_leaderboard_table">
+	<table  id="go_clipboard_table" class="stats" style="width: 25%; float: left; text-align: center;">
 		<?php 
 		$counter = 1;
 		$users_currency = $wpdb->get_results("SELECT uid FROM {$go_totals_table_name} ORDER BY CAST(currency as signed) DESC");
 		go_return_user_leaderboard($users_currency, $class_a_choice, $focuses, 'currency', $counter)
 		?>
 	</table>
-	<table  id="go_stats_leaderboard_table">
+	<table  id="go_clipboard_table" class="stats" style="width: 25%; float: left; text-align: center;">
 		<?php 
 		$counter = 1;
 		$users_bonus_currency = $wpdb->get_results("SELECT uid FROM {$go_totals_table_name} ORDER BY CAST(bonus_currency as signed) DESC");
 		go_return_user_leaderboard($users_bonus_currency, $class_a_choice, $focuses, 'bonus_currency', $counter)
 		?>
 	</table>
-	<table  id="go_stats_leaderboard_table">
+	<table  id="go_clipboard_table" class="stats" style="width: 25%; float: left; text-align: center;">
 		<?php 
 		$counter = 1;
 		$users_badge_count = $wpdb->get_results("SELECT uid FROM {$go_totals_table_name} ORDER BY CAST(badge_count as signed) DESC");
