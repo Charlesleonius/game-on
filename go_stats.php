@@ -678,8 +678,8 @@ function go_stats_leaderboard () {
 	 <div style="float: left; width: 25%;"><strong>BADGES</strong></div>
  	 <br style="clear: left;" />
 	</div>
-	<div style="width: 100%;">
-	<table  id="go_clipboard_table" class="stats" style="width: 20%; float: left; text-align: center; border-collapse: collapse; margin-right: 5%;">
+	<div style="width: 100%;" style="overflow: auto;">
+	<table  id="go_clipboard_table" class="stats" style="width: 20%; float: left; text-align: center; border-collapse: collapse; margin-right: 5%; overflow: auto;">
 	<th>Position</th>
 	<th>Username</th>
     <th>Amount</th>

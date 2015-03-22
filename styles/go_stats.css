@@ -141,7 +141,7 @@
 	font-size: 13px;
 	font-family: verdana;
 	white-space: nowrap;
-	overflow: hidden;
+	overflow: scroll;
 }
 
 #go_stats_body a{
@@ -486,6 +486,9 @@ html[xmlns] .dataTables_wrapper {
 /*
  * Table styles
  */
+table.stats tbody {
+	overflow: auto !important;
+}
 
 table.stats td,
 table.stats th {

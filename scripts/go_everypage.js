@@ -13,10 +13,9 @@ function go_deactivate_plugin () {
 
 jQuery(document).ready( function () {
   	jQuery('#go_clipboard_table').dataTable( {
-		"bPaginate": false 
-	});
-	jQuery('#go_stats_body_list').dataTable( {
-
+		"bPaginate": false, 
+		"scrollY": "100%",
+        "scrollCollapse": true
 	});
 });
 
