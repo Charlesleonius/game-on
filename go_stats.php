@@ -679,7 +679,7 @@ function go_stats_leaderboard () {
  	 <br style="clear: left;" />
 	</div>
 	<div style="width: 100%;">
-	<table  id="go_clipboard_table" class="stats" style="width: 25%; float: left; text-align: center; border-collapse: collapse">
+	<table  id="go_clipboard_table" class="stats" style="width: 20%; float: left; text-align: center; border-collapse: collapse; margin-right: 5%;">
 	<th>Position</th>
 	<th>Username</th>
     <th>Amount</th>
@@ -689,34 +689,34 @@ function go_stats_leaderboard () {
 		go_return_user_leaderboard($users_points, $class_a_choice, $focuses, 'points', $counter)
 		?></tr>
 	</table>
-	<table  id="go_clipboard_table" class="stats" style="width: 25%; float: left; text-align: center; border-collapse: collapse">
+	<table  id="go_clipboard_table" class="stats" style="width: 20%; float: left; text-align: center; border-collapse: collapse; margin-right: 5%;">
 	<th>Position</th>
 	<th>Username</th>
     <th>Amount</th>
 		<tr><?php 
 		$counter = 1;
 		$users_points = $wpdb->get_results("SELECT uid FROM {$go_totals_table_name} ORDER BY CAST(points as signed) DESC");
-		go_return_user_leaderboard($users_points, $class_a_choice, $focuses, 'points', $counter)
+		go_return_user_leaderboard($users_points, $class_a_choice, $focuses, 'currency', $counter)
 		?></tr>
 	</table>
-	<table  id="go_clipboard_table" class="stats" style="width: 25%; float: left; text-align: center; border-collapse: collapse">
+	<table  id="go_clipboard_table" class="stats" style="width: 20%; float: left; text-align: center; border-collapse: collapse; margin-right: 5%;">
 	<th>Position</th>
 	<th>Username</th>
     <th>Amount</th>
 		<tr><?php 
 		$counter = 1;
 		$users_points = $wpdb->get_results("SELECT uid FROM {$go_totals_table_name} ORDER BY CAST(points as signed) DESC");
-		go_return_user_leaderboard($users_points, $class_a_choice, $focuses, 'points', $counter)
+		go_return_user_leaderboard($users_points, $class_a_choice, $focuses, 'bonus_currency', $counter)
 		?></tr>
 	</table>
-	<table  id="go_clipboard_table" class="stats" style="width: 25%; float: left; text-align: center; border-collapse: collapse">
+	<table  id="go_clipboard_table" class="stats" style="width: 20%; float: left; text-align: center; border-collapse: collapse; margin-right: 5%;">
 	<th>Position</th>
 	<th>Username</th>
     <th>Amount</th>
 		<tr><?php 
 		$counter = 1;
 		$users_points = $wpdb->get_results("SELECT uid FROM {$go_totals_table_name} ORDER BY CAST(points as signed) DESC");
-		go_return_user_leaderboard($users_points, $class_a_choice, $focuses, 'points', $counter)
+		go_return_user_leaderboard($users_points, $class_a_choice, $focuses, 'badges', $counter)
 		?></tr>
 	</table>
 	</div>
