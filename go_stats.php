@@ -53,7 +53,7 @@ function go_admin_bar_stats () {
 				<div id="go_stats_progress_text_wrap">
 					<div id='go_stats_progress_text'><?php echo "<span id='go_stats_user_progress_top_value'>{$display_current_rank_points}</span>/<span id='go_stats_user_progress_bottom_value'>{$display_next_rank_points}</span>";?></div>
 				</div>
-				<div id='go_stats_progress_fill' style='width: <?php echo $percentage_of_level;?>%;<?php $color = barColor($current_bonus_currency); echo "background-color: {$color}";if($percentage_of_level >= 98){echo "border-radius: 15px";}?>'></div>
+				<div id='go_stats_progress_fill' style='width: <?php echo $percentage_of_level;?>%;<?php $color = barColor($current_bonus_currency, $current_penalty); echo "background-color: {$color}";if($percentage_of_level >= 98){echo "border-radius: 15px";}?>'></div>
 			</div>
             <?php if (go_return_options('go_focus_switch') == 'On') {?>
             <div id='go_stats_user_focuses'><?php echo ((!empty($user_focuses))?$user_focuses:'');?></div>
@@ -121,15 +121,16 @@ function go_stats_task_list () {
 				<?php
 				if ($is_admin) {
 				?>
+				<button class='go_stats_task_admin_submit' task='<?php echo $task->post_id;?>'>SEND</button>
 					<input type='text' class='go_stats_task_admin_message' id='go_stats_task_<?php echo $task->post_id ?>_message' name='go_stats_task_admin_message' placeholder='See me'/>
-                    <button class='go_stats_task_admin_submit' task='<?php echo $task->post_id;?>'></button>
+                    
 				<?php 
 				}
 				?>
 				<div class='go_stats_task_status_wrap'>
 				<?php
 				
-				$stage_count = (($custom['go_mta_three_stage_switch'][0] == 'on')?3:(($custom['go_mta_five_stage_switch'][0] == 'on')?5:4));
+				$stage_count = (($custom['go_mta_three_stage_switch'][0] == 'on')? 3 : (($custom['go_mta_five_stage_switch'][0] == 'on')? 5 : 4));
 				
 				$url_switch = array(
 					1 => !empty($custom['go_mta_encounter_url_key'][0]),
@@ -314,7 +315,7 @@ function go_stats_item_list () {
 	} else {
 		$user_id = get_current_user_id();
 	}
-	$items = $wpdb->get_results($wpdb->prepare("SELECT * FROM {$go_table_name} WHERE uid = %d AND status = %d AND gifted = %d ORDER BY timestamp DESC, reason DESC, id DESC", $user_id, -1, 0));
+	$items = $wpdb->get_results($wpdb->prepare("SELECT * FROM {$go_table_name} WHERE uid = %d AND status = %d AND gifted = %d ORDER BY timestamp DESC, id DESC, reason DESC", $user_id, -1, 0));
 	$gifted_items = $wpdb->get_results($wpdb->prepare("SELECT * FROM {$go_table_name} WHERE uid = %d AND status = %d AND gifted = %d ORDER BY timestamp DESC, reason DESC, id DESC", $user_id, -1, 1));
 	?>
 	<div style="width: 99%;">
@@ -323,7 +324,7 @@ function go_stats_item_list () {
 	 <div style="float: left; width: 33%;"><strong>SOLD</strong></div>
  	 <br style="clear: left;" />
 	</div>
-	<table  id="go_clipboard_table" class="stats" style="width: 33%; float: left; text-align: center;">
+	<table  id="go_clipboard_table" class="stats" style="width: 30%; float: left; text-align: center; margin-right: 2.5%; border-collapse: collapse">
 	<thead>
 		<tr>
       	<th>Title</th>
@@ -333,6 +334,7 @@ function go_stats_item_list () {
    		</tr>
    	</thead>
    	<tbody>
+	<ul id='go_stats_item_list_purchases' class='go_stats_body_list'>
 		<?php
 		
 		foreach ($items as $item) {
@@ -352,13 +354,16 @@ function go_stats_item_list () {
 		?>
 	</tbody>	
 	</table>
-	<table  id="go_clipboard_table" class="stats" style="width: 33%; float: left; text-align: center;">
+	<table  id="go_clipboard_table" class="stats" style="width: 30%; float: left; text-align: center; margin-right: 2.5%; border-collapse: collapse">
 		<tr>
       	<th>Title</th>
       	<th>Amount</th>
       	<th>Timestamp</th>
       	<th>Reason</th>
    		</tr>
+	</ul>
+	<ul id='go_stats_item_list_recieved' class='go_stats_body_list'>
+
         <?php
 		
 		if (!empty($gifted_items)) {		
@@ -378,7 +383,10 @@ function go_stats_item_list () {
 			}
 		}
 		?>
-	
+
+	</ul>
+	<ul class='go_stats_body_list'>
+	</ul>
 	<?php
 	die();
 }
@@ -400,9 +408,10 @@ function go_stats_rewards_list () {
 	 <div style="float: left; width: 33%;"><strong><?php echo strtoupper(go_return_options('go_bonus_currency_name'));?></strong></div>
  	 <br style="clear: left;" />
 	</div>
-	<table  id="go_clipboard_table" class="stats" style="width: 33%; float: left; text-align: center;">
+	<table  id="go_clipboard_table" class="stats" style="width: 30%; float: left; text-align: center; margin-right: 2.5%; border-collapse: collapse">
 	<th>Title</th>
       	<th>Amount</th>
+	<ul id='go_stats_rewards_list_points' class='go_stats_body_list'>
 		<?php
 			foreach ($rewards as $reward) {
 				$reward_id = $reward->post_id;
@@ -419,9 +428,11 @@ function go_stats_rewards_list () {
 			}
 		?>
 	</table>
-	<table  id="go_clipboard_table" class="stats" style="width: 33%; float: left; text-align: center;">
+	<table  id="go_clipboard_table" class="stats" style="width: 30%; float: left; text-align: center; margin-right: 2.5%; border-collapse: collapse">
 	<th>Title</th>
       	<th>Amount</th>
+	</ul>
+	<ul id='go_stats_rewards_list_currency' class='go_stats_body_list'>
 		<?php
 			foreach ($rewards as $reward) {
 				$reward_id = $reward->post_id;
@@ -438,9 +449,11 @@ function go_stats_rewards_list () {
 			}
 		?>
 	</table>
-	<table  id="go_clipboard_table" class="stats" style="width: 33%; float: left; text-align: center;">
+	<table  id="go_clipboard_table" class="stats" style="width: 30%; float: left; text-align: center; margin-right: 2.5%; border-collapse: collapse">
 	<th>Title</th>
       	<th>Amount</th>
+	</ul>
+	<ul id='go_stats_rewards_list_bonus_currency' class='go_stats_body_list'>
 		<?php
 			foreach ($rewards as $reward) {
 				$reward_id = $reward->post_id;
@@ -471,7 +484,7 @@ function go_stats_minutes_list () {
 	}
 	$minutes = $wpdb->get_results($wpdb->prepare("SELECT * FROM {$go_table_name} WHERE uid = %d AND (minutes != %d) ORDER BY id DESC", $user_id, 0)); 
 	?>
-	<table  id="go_clipboard_table" class="stats" style="width: 99%; text-align: center;">
+	<table  id="go_clipboard_table" class="stats" style="width: 99%; text-align: center; border-collapse: collapse">
 	<th>Title</th>
 	<th>Timestamp</th>
       	<th>Amount</th>
@@ -501,7 +514,7 @@ function go_stats_penalties_list () {
 	}
 	$penalties = $wpdb->get_results($wpdb->prepare("SELECT * FROM {$go_table_name} WHERE uid = %d AND (penalty != %d) ORDER BY id DESC", $user_id, 0)); 
 	?>
-	<table  id="go_clipboard_table" class="stats" style="width: 99%; text-align: center;">
+	<table  id="go_clipboard_table" class="stats" style="width: 99%; text-align: center; border-collapse: collapse">
 	<th>Title</th>
 	<th>Timestamp</th>
     <th>Amount</th>
@@ -666,33 +679,45 @@ function go_stats_leaderboard () {
  	 <br style="clear: left;" />
 	</div>
 	<div style="width: 100%;">
-	<table  id="go_clipboard_table" class="stats" style="width: 25%; float: left; text-align: center;">
-		<?php 
+	<table  id="go_clipboard_table" class="stats" style="width: 25%; float: left; text-align: center; border-collapse: collapse">
+	<th>Position</th>
+	<th>Username</th>
+    <th>Amount</th>
+		<tr><?php 
 		$counter = 1;
 		$users_points = $wpdb->get_results("SELECT uid FROM {$go_totals_table_name} ORDER BY CAST(points as signed) DESC");
 		go_return_user_leaderboard($users_points, $class_a_choice, $focuses, 'points', $counter)
-		?>
+		?></tr>
 	</table>
-	<table  id="go_clipboard_table" class="stats" style="width: 25%; float: left; text-align: center;">
-		<?php 
+	<table  id="go_clipboard_table" class="stats" style="width: 25%; float: left; text-align: center; border-collapse: collapse">
+	<th>Position</th>
+	<th>Username</th>
+    <th>Amount</th>
+		<tr><?php 
 		$counter = 1;
-		$users_currency = $wpdb->get_results("SELECT uid FROM {$go_totals_table_name} ORDER BY CAST(currency as signed) DESC");
-		go_return_user_leaderboard($users_currency, $class_a_choice, $focuses, 'currency', $counter)
-		?>
+		$users_points = $wpdb->get_results("SELECT uid FROM {$go_totals_table_name} ORDER BY CAST(points as signed) DESC");
+		go_return_user_leaderboard($users_points, $class_a_choice, $focuses, 'points', $counter)
+		?></tr>
 	</table>
-	<table  id="go_clipboard_table" class="stats" style="width: 25%; float: left; text-align: center;">
-		<?php 
+	<table  id="go_clipboard_table" class="stats" style="width: 25%; float: left; text-align: center; border-collapse: collapse">
+	<th>Position</th>
+	<th>Username</th>
+    <th>Amount</th>
+		<tr><?php 
 		$counter = 1;
-		$users_bonus_currency = $wpdb->get_results("SELECT uid FROM {$go_totals_table_name} ORDER BY CAST(bonus_currency as signed) DESC");
-		go_return_user_leaderboard($users_bonus_currency, $class_a_choice, $focuses, 'bonus_currency', $counter)
-		?>
+		$users_points = $wpdb->get_results("SELECT uid FROM {$go_totals_table_name} ORDER BY CAST(points as signed) DESC");
+		go_return_user_leaderboard($users_points, $class_a_choice, $focuses, 'points', $counter)
+		?></tr>
 	</table>
-	<table  id="go_clipboard_table" class="stats" style="width: 25%; float: left; text-align: center;">
-		<?php 
+	<table  id="go_clipboard_table" class="stats" style="width: 25%; float: left; text-align: center; border-collapse: collapse">
+	<th>Position</th>
+	<th>Username</th>
+    <th>Amount</th>
+		<tr><?php 
 		$counter = 1;
-		$users_badge_count = $wpdb->get_results("SELECT uid FROM {$go_totals_table_name} ORDER BY CAST(badge_count as signed) DESC");
-		go_return_user_leaderboard($users_badge_count, $class_a_choice, $focuses, 'badges', $counter)
-		?>
+		$users_points = $wpdb->get_results("SELECT uid FROM {$go_totals_table_name} ORDER BY CAST(points as signed) DESC");
+		go_return_user_leaderboard($users_points, $class_a_choice, $focuses, 'points', $counter)
+		?></tr>
 	</table>
 	</div>
 	<?php 
