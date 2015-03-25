@@ -141,7 +141,7 @@
 	font-size: 13px;
 	font-family: verdana;
 	white-space: nowrap;
-	overflow: scroll;
+	overflow: hidden;
 }
 
 #go_stats_body a{
@@ -262,32 +262,18 @@
 
 #go_stats_body_list{
 	display: inline-block;
-	width: 31%;
-	height: 100%;
-	float: left;
+	height: 100%;	
 	list-style-type: none;
 	margin: 0px 1.5% 0px 0px !important;
-	overflow-y: auto;
+	overflow: auto !important;
 	text-align: center;
 	border-collapse: collapse;
 }
 
-#go_stats_body_list td {
-   border: 1px solid grey;
-   padding: 4px;
-   background-color: white;
-   text-align: center;
-   width: 100%;
-   border-collapse: collapse;
-}
-
-#go_stats_body_list th {
-   border: 1px solid grey;
-   padding: 4px;
-   background-color: white;
-   text-align: center;
-   border-collapse: collapse;
-   width: 100%;
+table.stats tr.row:hover td {
+    color: #000;
+    background-color: #E2E2E2;
+    background-repeat: no-repeat;
 }
 
 #go_stats_body_list_minutes{
@@ -486,6 +472,7 @@ html[xmlns] .dataTables_wrapper {
 /*
  * Table styles
  */
+
 table.stats tbody {
 	overflow: auto !important;
 }
