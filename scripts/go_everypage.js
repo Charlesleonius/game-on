@@ -11,6 +11,7 @@ function go_deactivate_plugin () {
 	});	
 }
 
+
 function go_sounds (type) {
     if (type == 'store') {
         var audio = new Audio(PluginDir["url"] + 'media/gold.mp3');
@@ -20,6 +21,15 @@ function go_sounds (type) {
         audio.play();
     }
 }
+
+jQuery(document).ready( function () {
+  	jQuery('#go_clipboard_table').dataTable( {
+		"bPaginate": false, 
+		"scrollY": "100%",
+        "scrollCollapse": true
+	});
+});
+
 
 function hideVid () {
 	if (jQuery('#go_option_help_video').length) {
