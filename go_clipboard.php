@@ -1,8 +1,7 @@
 <?php
 
+add_action( 'admin_menu', 'go_clipboard' );
 function go_clipboard () {
-	global $wpdb;
-	$dir = plugin_dir_url( __FILE__ );
 	add_submenu_page( 'game-on-options.php', 'Clipboard', 'Clipboard', 'manage_options', 'go_clipboard', 'go_clipboard_menu' );
 }
 
