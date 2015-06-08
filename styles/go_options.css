@@ -357,6 +357,7 @@ input[type="submit"] {
 /** Export/Import Styles **/
 
 #go_share_wrap {
+	margin-bottom: 4px !important;
 	margin-left: 40px !important;	
 }
 

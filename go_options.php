@@ -369,6 +369,7 @@ if ( is_admin() ) {
                     ?>
                     <div id='go_share_tasks'>
                         <h1><?php echo ucfirst( go_return_options( 'go_tasks_plural_name' ) ); ?></h1>
+                        <div><input type='checkbox' name='go_export_tasks[]' value='all'/>All</div><br />
                         <?php
                         $args = array( 
                             'post_status' => 'publish',
@@ -377,13 +378,14 @@ if ( is_admin() ) {
                         $tasks = get_posts ( $args );
                         foreach ( $tasks as $task ) {
                             ?>
-                                <div><input type='checkbox' name='go_export_tasks[<?php echo $task->ID; ?>]' /><?php echo get_the_title( $task->ID ); ?></div><br />
+                                <div><input type='checkbox' name='go_export_tasks[]' value='<?php echo $task->ID; ?>' /><?php echo get_the_title( $task->ID ); ?></div><br />
                             <?php	
                         }
                         ?>
                     </div>
                     <div id='go_share_store'>
                         <h1><?php echo ucfirst( go_return_options( 'go_store_name' ) ); ?></h1>
+                        <div><input type='checkbox' name='go_export_store[]' value='all' />All</div><br />
                         <?php
                         $args = array( 
                             'post_status' => 'publish',
@@ -392,15 +394,14 @@ if ( is_admin() ) {
                         $items = get_posts ( $args );
                         foreach ( $items as $item ) {
                             ?>
-                                <div><input type='checkbox' name='go_export_store[<?php echo $item->ID; ?>]' /><?php echo get_the_title( $item->ID ); ?></div><br />
+                                <div><input type='checkbox' name='go_export_store[]' value='<?php echo $item->ID; ?>' /><?php echo get_the_title( $item->ID ); ?></div><br />
                             <?php	
                         }
                         ?>
                     </div>
                     <button onclick='go_export_data()' >Export</button>
                     <button onclick='go_import_data()' >Import</button>
-                
-                </div>
+                </div><br />
 			<input type="submit" name="Submit" value="Save Options" />
 			<input type="hidden" name="action" value="update" />
 			<input type="hidden" name="page_options" value="go_tasks_name, go_tasks_plural_name, go_first_stage_name, go_second_stage_name, go_third_stage_name, go_fourth_stage_name, go_fifth_stage_name, go_abandon_stage_button, go_second_stage_button, go_third_stage_button, go_fourth_stage_button, go_fifth_stage_button, go_store_name, go_task_loot_name, go_bonus_loot_name, go_points_name, go_points_prefix, go_points_suffix, go_currency_name, go_currency_prefix, go_currency_suffix, go_bonus_currency_name, go_bonus_currency_prefix, go_bonus_currency_suffix, go_penalty_name, go_penalty_prefix, go_penalty_suffix, go_minutes_name, go_minutes_prefix, go_minutes_suffix, go_level_names, go_level_plural_names, go_organization_name, go_class_a_name, go_class_b_name, go_focus_name, go_stats_name, go_inventory_name, go_badges_name, go_leaderboard_name, go_presets, go_admin_bar_display_switch, go_admin_bar_user_redirect, go_admin_bar_add_switch, go_admin_bar_add_minutes_switch, go_ranks, go_class_a, go_class_b, go_focus_switch, go_focus, go_admin_email, go_video_width, go_video_height, go_store_receipt_switch, go_full_student_name_switch, go_multiplier_switch, go_multiplier_threshold, go_penalty_switch, go_penalty_threshold, go_multiplier_percentage, go_data_reset_switch"/>
@@ -823,6 +824,55 @@ function go_save_extra_profile_fields( $user_id ) {
 		update_user_meta( $user_id, 'go_classifications', $class );
 	}
 }	
+
+function go_export () {
+	$task_ids = $_POST['go_export_task_ids'];
+	$store_item_ids = $_POST['go_export_store_item_ids'];
+	$export_ids = array_filter( array_merge( $task_ids, $store_item_ids ) );
+	
+	$xml_document = new DOMDocument( '1.0', 'UTF-8' );
+	$tasks_xml = $xml_document->createElement( 'tasks' );
+	$xml_document->appendChild( $tasks_xml );
+	$store_xml = $xml_document->createElement( 'items' );
+	$xml_document->appendChild( $store_xml );
+	
+	foreach ( $export_ids as $post_id ) {
+		$post_custom = get_post_custom( $post_id );
+		$post_type = get_post_type( $post_id );
+		switch ( $post_type ) {
+			case 'tasks':
+				$task_xml = $xml_document->createElement( 'task' );
+				$task_xml->setAttribute( 'post_title', get_the_title( $post_id ) );
+				$task_xml->setAttribute( 'post_type', 'tasks' );
+				$tasks_xml->appendChild( $task_xml );
+				break;
+			case 'go_store':
+				$item_xml = $xml_document->createElement( 'item' );
+				$item_xml->setAttribute( 'post_title', get_the_title( $post_id ) );
+				$item_xml->setAttribute( 'post_type', 'go_store' );
+				$store_xml->appendChild( $item_xml );
+				break;
+		}
+			
+		foreach( $post_custom as $key => $value ) {
+			if ( strpos( $key, 'go_' ) 	=== 0 ) {
+				$post_custom_xml = $xml_document->createElement( $key, serialize( $value ) );
+				if ( $post_type == 'tasks' ) {
+					$task_xml->appendChild( $post_custom_xml );	
+				} elseif ( $post_type == 'go_store' ) {
+					$item_xml->appendChild( $post_custom_xml );
+				}
+			}
+		}
+	}
+	$xml_document->formatOutput = true;
+	echo $xml_document->saveXML();
+	die();
+}
+
+function go_import () {
+	die();
+}
 
 function go_update_globals () {
 	global $wpdb;

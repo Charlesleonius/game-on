@@ -501,6 +501,19 @@ jQuery( document ).ready( function () {
 		}
 	});
 	
+	jQuery( 'input[name="go_export_tasks[]"][value="all"], input[name="go_export_store[]"][value="all"]' ).click( function () {
+		var export_checkboxes = jQuery( this ).attr( 'name' );
+		if ( jQuery( this ).is( ':checked' ) ) {
+			jQuery( 'input[name="' + export_checkboxes + '"]' ).each( function () {
+				jQuery( this ).prop( 'checked', true );
+			});
+		} else {
+			jQuery( 'input[name="' + export_checkboxes + '"]' ).each( function () {
+				jQuery( this ).prop( 'checked', false );
+			});
+		}
+	});
+	
 	jQuery( '#go_options_form' ).submit( function ( event ) {
 		if ( event.levels_saved !== true ) {
 			event.preventDefault();

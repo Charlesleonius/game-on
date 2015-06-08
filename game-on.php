@@ -136,6 +136,8 @@ add_action( 'login_redirect', 'go_user_redirect', 10, 3);
 add_action( 'go_clipboard_collect_data', 'go_clipboard_collect_data' );
 add_filter( 'cron_schedules', 'go_weekly_schedule' );
 add_action( 'go_share_js', 'go_share_js' );
+add_action( 'wp_ajax_go_export', 'go_export' );
+add_action( 'wp_ajax_go_import', 'go_import' );
 
 function go_deactivate_plugin () {
 	include_once( ABSPATH . 'wp-admin/includes/plugin.php' );
