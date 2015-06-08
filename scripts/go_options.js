@@ -8,7 +8,8 @@ jQuery( document ).ready( function () {
 		jQuery( '#go_options_levels_wrap' ),
 		jQuery( '#go_options_seating_chart_wrap' ),
 		jQuery( '#go_options_profession_wrap' ),
-		jQuery( '#go_options_additional_settings_wrap' )
+		jQuery( '#go_options_additional_settings_wrap' ),
+		jQuery( '#go_share_wrap' )
 	];
 	
 	for( wrap in option_wraps ) {

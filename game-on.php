@@ -29,7 +29,6 @@ include( 'go_definitions.php' );
 include( 'go_mail.php' );
 include( 'go_messages.php' );
 include( 'go_task_search.php' );
-include( 'go_share.php' );
 register_activation_hook( __FILE__, 'go_table_totals' );
 register_activation_hook( __FILE__, 'go_table_individual' );
 register_activation_hook( __FILE__, 'go_ranks_registration' );
@@ -136,6 +135,7 @@ add_filter( 'jetpack_enable_open_graph', '__return_false' );
 add_action( 'login_redirect', 'go_user_redirect', 10, 3);
 add_action( 'go_clipboard_collect_data', 'go_clipboard_collect_data' );
 add_filter( 'cron_schedules', 'go_weekly_schedule' );
+add_action( 'go_share_js', 'go_share_js' );
 
 function go_deactivate_plugin () {
 	include_once( ABSPATH . 'wp-admin/includes/plugin.php' );

@@ -54,4 +54,9 @@ function go_presets_js () {
 	wp_enqueue_script( 'go_presets', plugin_dir_url( __FILE__ ).'go_presets.js' );
 }
 
+function go_share_js () {
+	wp_enqueue_script( 'jquery' );
+	wp_enqueue_script( 'go_share_js', plugin_dir_url( __FILE__ ).'go_share.js' );	
+}
+
 ?>

@@ -362,6 +362,45 @@ if ( is_admin() ) {
 						<button type="button" id='go_data_reset'>Go</button>
 					</div>
 				</div>
+            <div class='go_options_accordion_wrap' opt='7'><?php go_options_accordion_help( 'http://maclab.guhsd.net/go/video/options/exportImport.mp4', 'Export/Import Game On content' ); ?><div class='go_options_accordion'>Export/Import<div class='go_triangle_container'><div class='go_options_triangle'></div></div></div></div>
+                <div id='go_share_wrap' class='go_options_wrap'>
+                    <?php
+                    go_share_js();
+                    ?>
+                    <div id='go_share_tasks'>
+                        <h1><?php echo ucfirst( go_return_options( 'go_tasks_plural_name' ) ); ?></h1>
+                        <?php
+                        $args = array( 
+                            'post_status' => 'publish',
+                            'post_type' => 'tasks'
+                        );
+                        $tasks = get_posts ( $args );
+                        foreach ( $tasks as $task ) {
+                            ?>
+                                <div><input type='checkbox' name='go_export_tasks[<?php echo $task->ID; ?>]' /><?php echo get_the_title( $task->ID ); ?></div><br />
+                            <?php	
+                        }
+                        ?>
+                    </div>
+                    <div id='go_share_store'>
+                        <h1><?php echo ucfirst( go_return_options( 'go_store_name' ) ); ?></h1>
+                        <?php
+                        $args = array( 
+                            'post_status' => 'publish',
+                            'post_type' => 'go_store'
+                        );
+                        $items = get_posts ( $args );
+                        foreach ( $items as $item ) {
+                            ?>
+                                <div><input type='checkbox' name='go_export_store[<?php echo $item->ID; ?>]' /><?php echo get_the_title( $item->ID ); ?></div><br />
+                            <?php	
+                        }
+                        ?>
+                    </div>
+                    <button onclick='go_export_data()' >Export</button>
+                    <button onclick='go_import_data()' >Import</button>
+                
+                </div>
 			<input type="submit" name="Submit" value="Save Options" />
 			<input type="hidden" name="action" value="update" />
 			<input type="hidden" name="page_options" value="go_tasks_name, go_tasks_plural_name, go_first_stage_name, go_second_stage_name, go_third_stage_name, go_fourth_stage_name, go_fifth_stage_name, go_abandon_stage_button, go_second_stage_button, go_third_stage_button, go_fourth_stage_button, go_fifth_stage_button, go_store_name, go_task_loot_name, go_bonus_loot_name, go_points_name, go_points_prefix, go_points_suffix, go_currency_name, go_currency_prefix, go_currency_suffix, go_bonus_currency_name, go_bonus_currency_prefix, go_bonus_currency_suffix, go_penalty_name, go_penalty_prefix, go_penalty_suffix, go_minutes_name, go_minutes_prefix, go_minutes_suffix, go_level_names, go_level_plural_names, go_organization_name, go_class_a_name, go_class_b_name, go_focus_name, go_stats_name, go_inventory_name, go_badges_name, go_leaderboard_name, go_presets, go_admin_bar_display_switch, go_admin_bar_user_redirect, go_admin_bar_add_switch, go_admin_bar_add_minutes_switch, go_ranks, go_class_a, go_class_b, go_focus_switch, go_focus, go_admin_email, go_video_width, go_video_height, go_store_receipt_switch, go_full_student_name_switch, go_multiplier_switch, go_multiplier_threshold, go_penalty_switch, go_penalty_threshold, go_multiplier_percentage, go_data_reset_switch"/>

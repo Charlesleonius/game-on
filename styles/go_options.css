@@ -353,3 +353,11 @@ input[type="submit"] {
 }
 
 /****************************/
+
+/** Export/Import Styles **/
+
+#go_share_wrap {
+	margin-left: 40px !important;	
+}
+
+/****************************/
