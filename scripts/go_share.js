@@ -1,5 +1,8 @@
 // JavaScript Document
 function go_export_data () {
+	
+	var fname = jQuery( 'input[name="go_export_fname"]' ).val()  ? jQuery( 'input[name="go_export_fname"]' ).val() : jQuery( 'input[name="go_export_fname"]' ).attr( 'placeholder' );
+	
 	var export_task_ids = [''];
 	var export_store_item_ids = [''];
 	
@@ -15,16 +18,18 @@ function go_export_data () {
 		}
 	});
 	
+	
 	jQuery.ajax({
 		type: 'POST',
 		url: MyAjax.ajaxurl,
 		data: {
 			action: 'go_export',
+			go_export_fname: fname,
 			go_export_task_ids: export_task_ids,
 			go_export_store_item_ids: export_store_item_ids
 		},
-		success: function (html) {
-			console.log( html );
+		success: function ( xml_url ) {
+			window.location = xml_url;
 		}
 	});
 }
