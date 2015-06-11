@@ -359,6 +359,21 @@ input[type="submit"] {
 #go_share_wrap {
 	margin-bottom: 4px !important;
 	margin-left: 40px !important;	
+	width: 100%;
+}
+
+#go_tasks_unfiltered_wrap, #go_tasks_filters_wrap, #go_tasks_filtered_wrap {
+	float: left;	
+}
+
+#go_tasks_unfiltered, #go_tasks_filters, #go_tasks_filtered, #go_store_unfiltered {
+	display: inline-block;
+	height: 200px;
+	overflow-y: scroll;	
+}
+
+#go_tasks_filters {
+	display: inline-block;
 }
 
 /****************************/

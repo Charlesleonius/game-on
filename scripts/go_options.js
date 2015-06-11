@@ -459,6 +459,14 @@ jQuery( document ).ready( function () {
 		jQuery( '.go_add_profession' ).last().after( '<button type="button" class="go_remove_profession">-</button>' );
 	});
 	
+	jQuery( 'input[name="go_export_fname"]' ).keypress( function ( e ) {
+		var regex = new RegExp( "^[A-Za-z0-9_]$" );
+		var key = String.fromCharCode( ! e.charCode ? e.which : e.charCode );
+		if ( ! regex.test( key ) ) {
+			e.preventDefault();
+		}
+	});
+	
 	jQuery( 'input[name="go_data_reset_all"]' ).click( function () {
 		if ( jQuery( 'input[name="go_data_reset_all"]' ).is( ':checked' ) ) {
 			for ( input in data_reset_inputs ) {

@@ -30,6 +30,9 @@ function go_export_data () {
 		},
 		success: function ( xml_url ) {
 			window.location = xml_url;
+			jQuery( 'input[name="go_export_fname"]' ).val( '' );
+			jQuery( 'input[name="go_export_tasks[]"]' ).prop( 'checked', false);
+			jQuery( 'input[name="go_export_store[]"]' ).prop( 'checked', false);
 		}
 	});
 }

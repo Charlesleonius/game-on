@@ -367,38 +367,74 @@ if ( is_admin() ) {
                     <?php
                     go_share_js();
                     ?>
-                    Filename: <input type='text' name='go_export_fname' placeholder="<?php echo 'go_export_'.date('mdy'); ?>" />.xml
+                    Filename: <input type='text' name='go_export_fname' placeholder="<?php echo 'go_export_'.date( 'mdy' ); ?>" />.xml
                     <div id='go_share_tasks'>
-                        <h1><?php echo ucfirst( go_return_options( 'go_tasks_plural_name' ) ); ?></h1>
-                        <div><input type='checkbox' name='go_export_tasks[]' value='all'/>All</div><br />
-                        <?php
-                        $args = array( 
-                            'post_status' => 'publish',
-                            'post_type' => 'tasks'
-                        );
-                        $tasks = get_posts ( $args );
-                        foreach ( $tasks as $task ) {
-                            ?>
-                                <div><input type='checkbox' name='go_export_tasks[]' value='<?php echo $task->ID; ?>' /><?php echo get_the_title( $task->ID ); ?></div><br />
-                            <?php	
-                        }
-                        ?>
+                    	<div id='go_tasks_unfiltered_wrap'>
+                            <h1><?php echo ucfirst( go_return_options( 'go_tasks_plural_name' ) ); ?></h1>
+                            <h3>Unfiltered</h3><div id='go_tasks_unfiltered'>
+                                <div><input type='checkbox' name='go_export_tasks[]' value='all'/>All</div><br />
+                                <?php
+                                $args = array( 
+                                    'post_status' => 'publish',
+                                    'post_type' => 'tasks'
+                                );
+                                $tasks = get_posts ( $args );
+                                foreach ( $tasks as $task ) {
+                                    ?>
+                                        <div><input type='checkbox' name='go_export_tasks[]' value='<?php echo $task->ID; ?>' /><?php echo get_the_title( $task->ID ); ?></div><br />
+                                    <?php	
+                                }
+                                ?>
+                            </div>
+                        </div>
+                        <div id='go_tasks_filters_wrap'>
+                            <h3>Filters</h3><div id='go_tasks_filters'>
+                                <?php 
+                                $task_taxonomies = get_object_taxonomies( 'tasks' );
+                                $task_taxonomy_terms = get_terms( $task_taxonomies );
+                                foreach ( $task_taxonomies as $taxonomy ) {
+                                    $count = 1;
+                                    foreach ( $task_taxonomy_terms as $taxonomy_term ) {
+                                        //print_r($taxonomy_term);
+                                        if ( $taxonomy_term->taxonomy == $taxonomy) {
+                                            $taxonomy_data = get_taxonomy( $taxonomy );
+                                            if ( $count == 1 ) {
+                                                ?>
+                                                <h4><?php echo $taxonomy_data->label; ?></h4>
+                                                <input type='checkbox' /> All<br />
+                                                <?php
+                                                $count++;
+                                            }
+                                            ?>
+                                            <input type='checkbox' value='' /><?php echo $taxonomy_term->name; ?>
+                                            <?php
+                                        }
+                                    }
+                                }
+                                ?>
+                            </div>
+                        </div>
+                        <div id='go_tasks_filtered_wrap'>
+                       		<h3>Filtered List</h3><div id='go_tasks_filtered'></div>
+                        </div>
                     </div>
                     <div id='go_share_store'>
                         <h1><?php echo ucfirst( go_return_options( 'go_store_name' ) ); ?></h1>
-                        <div><input type='checkbox' name='go_export_store[]' value='all' />All</div><br />
-                        <?php
-                        $args = array( 
-                            'post_status' => 'publish',
-                            'post_type' => 'go_store'
-                        );
-                        $items = get_posts ( $args );
-                        foreach ( $items as $item ) {
+                         <h3>Unfiltered</h3><div id='go_store_unfiltered'>
+                            <div><input type='checkbox' name='go_export_store[]' value='all' />All</div><br />
+                            <?php
+                            $args = array( 
+                                'post_status' => 'publish',
+                                'post_type' => 'go_store'
+                            );
+                            $items = get_posts ( $args );
+                            foreach ( $items as $item ) {
+                                ?>
+                                    <div><input type='checkbox' name='go_export_store[]' value='<?php echo $item->ID; ?>' /><?php echo get_the_title( $item->ID ); ?></div><br />
+                                <?php	
+                            }
                             ?>
-                                <div><input type='checkbox' name='go_export_store[]' value='<?php echo $item->ID; ?>' /><?php echo get_the_title( $item->ID ); ?></div><br />
-                            <?php	
-                        }
-                        ?>
+                        </div>
                     </div>
                     <button onclick='go_export_data()' >Export</button>
                     <button onclick='go_import_data()' >Import</button>
@@ -832,15 +868,21 @@ function go_save_extra_profile_fields( $user_id ) {
 
 function go_export () {
 	$fname = $_POST['go_export_fname'].'.xml';
-	$task_ids = $_POST['go_export_task_ids'];
-	$store_item_ids = $_POST['go_export_store_item_ids'];
-	$export_ids = array_filter( array_merge( $task_ids, $store_item_ids ) );
+	$task_ids = array_filter( $_POST['go_export_task_ids'] );
+	$store_item_ids = array_filter( $_POST['go_export_store_item_ids'] );
+	$export_ids = array_merge( $task_ids, $store_item_ids );
 	
 	$xml_document = new DOMDocument( '1.0', 'UTF-8' );
-	$tasks_xml = $xml_document->createElement( 'tasks' );
-	$xml_document->appendChild( $tasks_xml );
-	$store_xml = $xml_document->createElement( 'items' );
-	$xml_document->appendChild( $store_xml );
+	$go_xml_body = $xml_document->createElement( 'go_data' );
+	$xml_document->appendChild( $go_xml_body );
+	if ( ! empty( $task_ids ) ) {
+		$tasks_xml = $xml_document->createElement( 'tasks' );
+		$go_xml_body->appendChild( $tasks_xml );
+	}
+	if ( ! empty( $store_item_ids ) ) {
+		$store_xml = $xml_document->createElement( 'items' );
+		$go_xml_body->appendChild( $store_xml );
+	}
 	
 	foreach ( $export_ids as $post_id ) {
 		$post_custom = get_post_custom( $post_id );
@@ -871,15 +913,20 @@ function go_export () {
 			}
 		}
 	}
+	
 	$xml_document->formatOutput = true;
 	$xml = $xml_document->saveXML();
+	
 	if ( ! is_dir( plugin_dir_path( __FILE__ ).'/downloads/' ) ) {
 		mkdir( plugin_dir_path( __FILE__ ).'/downloads/', 0777 );
 	}
-	$xml_file = fopen( plugin_dir_path( __FILE__ )."/downloads/{$fname}", 'w+' );
-	fwrite( $xml_file, $xml );
-
-	echo plugin_dir_url( __FILE__ )."downloads/{$fname}";
+	
+	if ( is_dir( plugin_dir_path( __FILE__ ).'/downloads/' ) ) {
+		$xml_file = fopen( plugin_dir_path( __FILE__ )."/downloads/{$fname}", 'w+' );
+		fwrite( $xml_file, $xml );
+		echo plugin_dir_url( __FILE__ )."go_download.php?go_export_fname={$_POST['go_export_fname']}";
+	}
+	
 	die();
 }
 
