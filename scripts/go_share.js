@@ -2,18 +2,18 @@ function go_export_data () {
 	
 	var fname = jQuery( 'input[name="go_export_fname"]' ).val()  ? jQuery( 'input[name="go_export_fname"]' ).val() : jQuery( 'input[name="go_export_fname"]' ).attr( 'placeholder' );
 	
-	var export_task_ids = [''];
-	var export_store_item_ids = [''];
+	var export_unfiltered_task_ids = [''];
+	var export_unfiltered_store_item_ids = [''];
 	
 	jQuery( 'input[name="go_export_tasks[]"]' ).each( function () {
 		if ( jQuery( this ).is( ':checked' ) && jQuery( this ).val() !== 'all' ) {
-			export_task_ids.push( jQuery( this ).val() );
+			export_unfiltered_task_ids.push( jQuery( this ).val() );
 		}
 	});
 	
 	jQuery( 'input[name="go_export_store[]"]' ).each( function () {
 		if ( jQuery( this ).is( ':checked' ) && jQuery( this ).val() !== 'all' ) {
-			export_store_item_ids.push( jQuery( this ).val() );
+			export_unfiltered_store_item_ids.push( jQuery( this ).val() );
 		}
 	});
 	
@@ -24,8 +24,8 @@ function go_export_data () {
 		data: {
 			action: 'go_export',
 			go_export_fname: fname,
-			go_export_task_ids: export_task_ids,
-			go_export_store_item_ids: export_store_item_ids
+			go_export_unfiltered_task_ids: export_unfiltered_task_ids,
+			go_export_unfiltered_store_item_ids: export_unfiltered_store_item_ids
 		},
 		success: function ( xml_info ) {
 			jQuery( 'input[name="go_export_fname"]' ).val( '' );

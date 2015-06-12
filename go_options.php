@@ -372,7 +372,7 @@ if ( is_admin() ) {
                     	<div id='go_tasks_unfiltered_wrap'>
                             <h1><?php echo ucfirst( go_return_options( 'go_tasks_plural_name' ) ); ?></h1>
                             <h3>Unfiltered</h3><div id='go_tasks_unfiltered'>
-                                <div><input type='checkbox' name='go_export_tasks[]' value='all'/>All</div><br />
+                                <input type='checkbox' name='go_export_tasks[]' value='all'/>All<br />
                                 <?php
                                 $args = array( 
                                     'post_status' => 'publish',
@@ -381,7 +381,7 @@ if ( is_admin() ) {
                                 $tasks = get_posts ( $args );
                                 foreach ( $tasks as $task ) {
                                     ?>
-                                        <div><input type='checkbox' name='go_export_tasks[]' value='<?php echo $task->ID; ?>' /><?php echo get_the_title( $task->ID ); ?></div><br />
+                                        <input type='checkbox' name='go_export_tasks[]' value='<?php echo $task->ID; ?>' /><?php echo get_the_title( $task->ID ); ?><br />
                                     <?php	
                                 }
                                 ?>
@@ -401,12 +401,12 @@ if ( is_admin() ) {
                                             if ( $count == 1 ) {
                                                 ?>
                                                 <h4><?php echo $taxonomy_data->label; ?></h4>
-                                                <input type='checkbox' /> All<br />
+                                                <input type='checkbox' />All<br />
                                                 <?php
                                                 $count++;
                                             }
                                             ?>
-                                            <input type='checkbox' value='' /><?php echo $taxonomy_term->name; ?>
+                                            <input type='checkbox' value='' /><?php echo $taxonomy_term->name; ?><br />
                                             <?php
                                         }
                                     }
@@ -419,22 +419,54 @@ if ( is_admin() ) {
                         </div>
                     </div>
                     <div id='go_share_store'>
-                        <h1><?php echo ucfirst( go_return_options( 'go_store_name' ) ); ?></h1>
-                         <h3>Unfiltered</h3><div id='go_store_unfiltered'>
-                            <div><input type='checkbox' name='go_export_store[]' value='all' />All</div><br />
-                            <?php
-                            $args = array( 
-                                'post_status' => 'publish',
-                                'post_type' => 'go_store'
-                            );
-                            $items = get_posts ( $args );
-                            foreach ( $items as $item ) {
+                    	<div id='go_store_unfiltered_wrap'>
+                            <h1><?php echo ucfirst( go_return_options( 'go_store_name' ) ); ?></h1>
+                             <h3>Unfiltered</h3><div id='go_store_unfiltered'>
+                                <input type='checkbox' name='go_export_store[]' value='all' />All<br />
+                                <?php
+                                $args = array( 
+                                    'post_status' => 'publish',
+                                    'post_type' => 'go_store'
+                                );
+                                $items = get_posts ( $args );
+                                foreach ( $items as $item ) {
+                                    ?>
+                                       <input type='checkbox' name='go_export_store[]' value='<?php echo $item->ID; ?>' /><?php echo get_the_title( $item->ID ); ?><br />
+                                    <?php	
+                                }
                                 ?>
-                                    <div><input type='checkbox' name='go_export_store[]' value='<?php echo $item->ID; ?>' /><?php echo get_the_title( $item->ID ); ?></div><br />
-                                <?php	
+                            </div>
+                        </div>
+                    </div>
+                    <div id='go_store_filters_wrap'>
+                        <h3>Filters</h3><div id='go_store_filters'>
+                            <?php 
+                            $store_taxonomies = get_object_taxonomies( 'go_store' );
+                            $store_taxonomy_terms = get_terms( $store_taxonomies );
+                            foreach ( $store_taxonomies as $taxonomy ) {
+                                $count = 1;
+                                foreach ( $store_taxonomy_terms as $taxonomy_term ) {
+                                    //print_r($taxonomy_term);
+                                    if ( $taxonomy_term->taxonomy == $taxonomy) {
+                                        $taxonomy_data = get_taxonomy( $taxonomy );
+                                        if ( $count == 1 ) {
+                                            ?>
+                                            <h4><?php echo $taxonomy_data->label; ?></h4>
+                                            <input type='checkbox' /> All<br />
+                                            <?php
+                                            $count++;
+                                        }
+                                        ?>
+                                        <input type='checkbox' value='' /><?php echo $taxonomy_term->name; ?><br />
+                                        <?php
+                                    }
+                                }
                             }
                             ?>
                         </div>
+                    </div>
+                    <div id='go_store_filtered_wrap'>
+                        <h3>Filtered List</h3><div id='go_store_filtered'></div>
                     </div>
                     <button onclick='go_export_data()' >Export</button>
                     <button onclick='go_import_data()' >Import</button>
@@ -864,8 +896,8 @@ function go_save_extra_profile_fields( $user_id ) {
 
 function go_export () {
 	$fname = $_POST['go_export_fname'].'.xml';
-	$task_ids = array_filter( $_POST['go_export_task_ids'] );
-	$store_item_ids = array_filter( $_POST['go_export_store_item_ids'] );
+	$task_ids = array_filter( $_POST['go_export_unfiltered_task_ids'] );
+	$store_item_ids = array_filter( $_POST['go_export_unfiltered_store_item_ids'] );
 	$export_ids = array_merge( $task_ids, $store_item_ids );
 	
 	$xml_document = new DOMDocument( '1.0', 'UTF-8' );
