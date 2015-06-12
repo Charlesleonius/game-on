@@ -443,10 +443,6 @@ if ( is_admin() ) {
 			<input type="hidden" name="action" value="update" />
 			<input type="hidden" name="page_options" value="go_tasks_name, go_tasks_plural_name, go_first_stage_name, go_second_stage_name, go_third_stage_name, go_fourth_stage_name, go_fifth_stage_name, go_abandon_stage_button, go_second_stage_button, go_third_stage_button, go_fourth_stage_button, go_fifth_stage_button, go_store_name, go_task_loot_name, go_bonus_loot_name, go_points_name, go_points_prefix, go_points_suffix, go_currency_name, go_currency_prefix, go_currency_suffix, go_bonus_currency_name, go_bonus_currency_prefix, go_bonus_currency_suffix, go_penalty_name, go_penalty_prefix, go_penalty_suffix, go_minutes_name, go_minutes_prefix, go_minutes_suffix, go_level_names, go_level_plural_names, go_organization_name, go_class_a_name, go_class_b_name, go_focus_name, go_stats_name, go_inventory_name, go_badges_name, go_leaderboard_name, go_presets, go_admin_bar_display_switch, go_admin_bar_user_redirect, go_admin_bar_add_switch, go_admin_bar_add_minutes_switch, go_ranks, go_class_a, go_class_b, go_focus_switch, go_focus, go_admin_email, go_video_width, go_video_height, go_store_receipt_switch, go_full_student_name_switch, go_multiplier_switch, go_multiplier_threshold, go_penalty_switch, go_penalty_threshold, go_multiplier_percentage, go_data_reset_switch"/>
         </form>
-        <form id='go_export_form' action='<?php echo plugin_dir_url( __FILE__ ).'go_export.php'; ?>' method="post">
-        	<input type='hidden' name='go_export_task_ids' value='' />
-            <input type='hidden' name='go_export_item_ids' value='' />
-        </form>
         </div>
         <?php	
 	}
@@ -916,7 +912,6 @@ function go_export () {
 	
 	$xml_document->formatOutput = true;
 	$xml = $xml_document->saveXML();
-	
 	/*if ( ! is_dir( plugin_dir_path( __FILE__ ).'/downloads/' ) ) {
 		mkdir( plugin_dir_path( __FILE__ ).'/downloads/', 0777 );
 	}
@@ -931,6 +926,7 @@ function go_export () {
 		'xml' => $xml
 	);
 	echo json_encode( $xml_info  );
+	
 	die();
 }
 
