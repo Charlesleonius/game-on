@@ -28,8 +28,14 @@ function go_export_data () {
 			go_export_task_ids: export_task_ids,
 			go_export_store_item_ids: export_store_item_ids
 		},
-		success: function ( xml_url ) {
-			window.location = xml_url;
+		success: function ( xml_info ) {
+			xml_info = JSON.parse( xml_info );
+			console.log( xml_info );
+			jQuery.post( 
+				xml_info['url'],
+				{ 'gooby': 'plz' }
+			);
+			window.location = xml_info['url'];
 			jQuery( 'input[name="go_export_fname"]' ).val( '' );
 			jQuery( 'input[name="go_export_tasks[]"]' ).prop( 'checked', false);
 			jQuery( 'input[name="go_export_store[]"]' ).prop( 'checked', false);

@@ -917,16 +917,20 @@ function go_export () {
 	$xml_document->formatOutput = true;
 	$xml = $xml_document->saveXML();
 	
-	if ( ! is_dir( plugin_dir_path( __FILE__ ).'/downloads/' ) ) {
+	/*if ( ! is_dir( plugin_dir_path( __FILE__ ).'/downloads/' ) ) {
 		mkdir( plugin_dir_path( __FILE__ ).'/downloads/', 0777 );
 	}
 	
 	if ( is_dir( plugin_dir_path( __FILE__ ).'/downloads/' ) ) {
 		$xml_file = fopen( plugin_dir_path( __FILE__ )."/downloads/{$fname}", 'w+' );
 		fwrite( $xml_file, $xml );
-		echo plugin_dir_url( __FILE__ )."go_download.php?go_export_fname={$_POST['go_export_fname']}";
 	}
-	
+	*/
+	$xml_info = array(
+		'url' => plugin_dir_url( __FILE__ )."go_download.php?go_export_fname={$_POST['go_export_fname']}",
+		'xml' => $xml
+	);
+	echo json_encode( $xml_info  );
 	die();
 }
 
