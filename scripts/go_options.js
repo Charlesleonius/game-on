@@ -467,6 +467,19 @@ jQuery( document ).ready( function () {
 		}
 	});
 	
+	jQuery( 'input[value="all"]' ).click( function () {
+		var export_checkboxes = jQuery( this ).attr( 'name' );
+		if ( jQuery( this ).is( ':checked' ) ) {
+			jQuery( 'input[name="' + export_checkboxes + '"]' ).each( function () {
+				jQuery( this ).prop( 'checked', true );
+			});
+		} else {
+			jQuery( 'input[name="' + export_checkboxes + '"]' ).each( function () {
+				jQuery( this ).prop( 'checked', false );
+			});
+		}
+	});
+	
 	jQuery( 'input[name="go_data_reset_all"]' ).click( function () {
 		if ( jQuery( 'input[name="go_data_reset_all"]' ).is( ':checked' ) ) {
 			for ( input in data_reset_inputs ) {
@@ -506,19 +519,6 @@ jQuery( document ).ready( function () {
 			} else {
 				alert( "ATTENTION: Please select data to reset, and try again!" );
 			}
-		}
-	});
-	
-	jQuery( 'input[name="go_export_tasks[]"][value="all"], input[name="go_export_store[]"][value="all"]' ).click( function () {
-		var export_checkboxes = jQuery( this ).attr( 'name' );
-		if ( jQuery( this ).is( ':checked' ) ) {
-			jQuery( 'input[name="' + export_checkboxes + '"]' ).each( function () {
-				jQuery( this ).prop( 'checked', true );
-			});
-		} else {
-			jQuery( 'input[name="' + export_checkboxes + '"]' ).each( function () {
-				jQuery( this ).prop( 'checked', false );
-			});
 		}
 	});
 	

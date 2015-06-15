@@ -395,18 +395,17 @@ if ( is_admin() ) {
                                 foreach ( $task_taxonomies as $taxonomy ) {
                                     $count = 1;
                                     foreach ( $task_taxonomy_terms as $taxonomy_term ) {
-                                        //print_r($taxonomy_term);
                                         if ( $taxonomy_term->taxonomy == $taxonomy) {
                                             $taxonomy_data = get_taxonomy( $taxonomy );
                                             if ( $count == 1 ) {
                                                 ?>
                                                 <h4><?php echo $taxonomy_data->label; ?></h4>
-                                                <input type='checkbox' />All<br />
+                                                <input type='checkbox' name='go_export_task_tax[<?php echo $taxonomy_data->label; ?>]' class='go_task_tax_filter' value='all'  />All<br />
                                                 <?php
                                                 $count++;
                                             }
                                             ?>
-                                            <input type='checkbox' value='' /><?php echo $taxonomy_term->name; ?><br />
+                                            <input type='checkbox' value='<?php echo $taxonomy_term->name; ?>' class='go_task_tax_filter' tax='<?php echo $taxonomy_data->label; ?>' name='go_export_task_tax[<?php echo $taxonomy_data->label; ?>]' /><?php echo $taxonomy_term->name; ?><br />
                                             <?php
                                         }
                                     }
@@ -446,18 +445,17 @@ if ( is_admin() ) {
                             foreach ( $store_taxonomies as $taxonomy ) {
                                 $count = 1;
                                 foreach ( $store_taxonomy_terms as $taxonomy_term ) {
-                                    //print_r($taxonomy_term);
                                     if ( $taxonomy_term->taxonomy == $taxonomy) {
                                         $taxonomy_data = get_taxonomy( $taxonomy );
                                         if ( $count == 1 ) {
                                             ?>
                                             <h4><?php echo $taxonomy_data->label; ?></h4>
-                                            <input type='checkbox' /> All<br />
+                                            <input type='checkbox' name='go_export_store_tax[<?php echo $taxonomy_data->label; ?>]' class='go_store_tax_filter' value='all' /> All<br />
                                             <?php
                                             $count++;
                                         }
                                         ?>
-                                        <input type='checkbox' value='' /><?php echo $taxonomy_term->name; ?><br />
+                                        <input type='checkbox' value='<?php echo $taxonomy_term->name; ?>' class='go_store_tax_filter' tax='<?php echo $taxonomy_data->label; ?>' name='go_export_store_tax[<?php echo $taxonomy_data->label; ?>]'/><?php echo $taxonomy_term->name; ?><br />
                                         <?php
                                     }
                                 }
@@ -898,6 +896,12 @@ function go_export () {
 	$fname = $_POST['go_export_fname'].'.xml';
 	$task_ids = array_filter( $_POST['go_export_unfiltered_task_ids'] );
 	$store_item_ids = array_filter( $_POST['go_export_unfiltered_store_item_ids'] );
+	$task_filters = array_filter( $_POST['go_export_task_filters'] );
+	$store_filters = array_filter( $_POST['go_export_store_filters'] );
+	
+	print_r( $task_filters );
+	print_r( $store_filters );
+	
 	$export_ids = array_merge( $task_ids, $store_item_ids );
 	
 	$xml_document = new DOMDocument( '1.0', 'UTF-8' );
@@ -952,12 +956,13 @@ function go_export () {
 		$xml_file = fopen( plugin_dir_path( __FILE__ )."/downloads/{$fname}", 'w+' );
 		fwrite( $xml_file, $xml );
 	}
-	*/
+	
 	$xml_info = array(
 		'url' => plugin_dir_url( __FILE__ )."go_download.php?go_export_fname={$_POST['go_export_fname']}",
 		'xml' => $xml
 	);
 	echo json_encode( $xml_info  );
+	*/
 	
 	die();
 }
