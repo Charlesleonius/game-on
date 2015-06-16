@@ -374,4 +374,8 @@ input[type="submit"] {
 	display: inline-block;
 }
 
+#go_import_upload{
+	display: none !important;	
+}
+
 /****************************/

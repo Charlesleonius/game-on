@@ -480,6 +480,37 @@ jQuery( document ).ready( function () {
 		}
 	});
 	
+	jQuery( '.go_store_tax_filter, .go_task_tax_filter' ).click( function () {
+		
+		var export_filters = [''];
+		var post_type = jQuery( this ).attr( 'post_type' );
+		jQuery( '.' + jQuery( this ).attr( 'class' ) ).each( function () {
+            if ( jQuery( this ).is( ':checked' ) && jQuery( this ).val() !== 'all' ) {
+				if ( ! ( jQuery( this ).attr( 'tax' ) in export_filters )  ) {
+					export_filters[ jQuery( this ).attr( 'tax' ) ] = [''];
+				}
+				export_filters[ jQuery( this ).attr( 'tax' ) ].push( jQuery( this ).val() );
+			}
+        });
+		
+		/* Make sure to convert JS associative arrays to objects since PHP can't understand JS associative arrays*/
+		export_filters = jQuery.extend( {}, export_filters );
+		
+		jQuery.ajax({
+			method: 'POST',
+			url: MyAjax.ajaxurl,
+			data: {
+				action: 'go_filtered_export_list',
+				post_type: post_type,
+				export_filters: export_filters
+			},
+			success: function ( filtered_list ) {
+				jQuery( 'div[post_type="' + post_type + '"]' ).html( filtered_list );
+			}
+		});
+		
+	});
+	
 	jQuery( 'input[name="go_data_reset_all"]' ).click( function () {
 		if ( jQuery( 'input[name="go_data_reset_all"]' ).is( ':checked' ) ) {
 			for ( input in data_reset_inputs ) {

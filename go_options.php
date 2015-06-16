@@ -344,17 +344,17 @@ if ( is_admin() ) {
 					go_options_input( 'Store Receipts', 'checkbox', 'go_store_receipt_switch', 'http://maclab.guhsd.net/go/video/options/storeReceipt.mp4', 'Receive email notification for each store purchase (off by default)' );
 					go_options_input( 'Full Student Name', 'checkbox', 'go_full_student_name_switch', 'http://maclab.guhsd.net/go/video/options/fullStudentName.mp4', 'Display only first name and last initial (default)' );
 					go_options_input(get_option( 'go_bonus_currency_name', 'Bonus' ), 'checkbox', 'go_multiplier_switch', 'http://maclab.guhsd.net/go/video/options/multiplier.mp4', 'Enable bonus mechanism to boost rewards' );
-					go_options_input(get_option( 'go_bonus_currency_name', 'Bonus' ).' Threshold', 'text', 'go_multiplier_threshold', 'http://maclab.guhsd.net/go/video/options/multiplierThreshold.mp4', 'Number of bonus points required to boost rewards' );
-					go_options_input(go_return_options( 'go_penalty_name' ), 'checkbox', 'go_penalty_switch', 'http://maclab.guhsd.net/go/video/options/penalty2.mp4', 'Enable penalty mechanism to reduce rewards' );
-					go_options_input(go_return_options( 'go_penalty_name' ).' Threshold', 'text', 'go_penalty_threshold', 'http://maclab.guhsd.net/go/video/options/penaltyThreshold.mp4', 'Number of penalty points required to reduce rewards' );
+					go_options_input( get_option( 'go_bonus_currency_name', 'Bonus' ).' Threshold', 'text', 'go_multiplier_threshold', 'http://maclab.guhsd.net/go/video/options/multiplierThreshold.mp4', 'Number of bonus points required to boost rewards' );
+					go_options_input( go_return_options( 'go_penalty_name' ), 'checkbox', 'go_penalty_switch', 'http://maclab.guhsd.net/go/video/options/penalty2.mp4', 'Enable penalty mechanism to reduce rewards' );
+					go_options_input( go_return_options( 'go_penalty_name' ).' Threshold', 'text', 'go_penalty_threshold', 'http://maclab.guhsd.net/go/video/options/penaltyThreshold.mp4', 'Number of penalty points required to reduce rewards' );
 					go_options_input( 'Multiplier %', 'text', 'go_multiplier_percentage', 'http://maclab.guhsd.net/go/video/options/multiplierPercentage.mp4', 'Percentage of rewards awarded or deducted at each threshold' );
 					go_options_input( 'Data Reset', 'checkbox', 'go_data_reset_switch', 'http://maclab.guhsd.net/go/video/options/dataReset.mp4', 'Clear all user data for specific categories DANGER!' );
-					go_options_input(go_return_options( 'go_points_name' ), 'checkbox', 'go_data_reset_points', '', null, false, 'points' );
-					go_options_input(go_return_options( 'go_currency_name' ), 'checkbox', 'go_data_reset_currency', '', null, false, 'currency' );
-					go_options_input(go_return_options( 'go_bonus_currency_name' ), 'checkbox', 'go_data_reset_bonus_currency', '', null, false, 'bonus_currency' );
-					go_options_input(go_return_options( 'go_penalty_name' ), 'checkbox', 'go_data_reset_penalty', '', null, false, 'penalty' );
-					go_options_input(go_return_options( 'go_minutes_name' ), 'checkbox', 'go_data_reset_minutes', '', null, false, 'minutes' );
-					go_options_input(go_return_options( 'go_badges_name' ), 'checkbox', 'go_data_reset_badges', '', null, false, 'badges' );
+					go_options_input( go_return_options( 'go_points_name' ), 'checkbox', 'go_data_reset_points', '', null, false, 'points' );
+					go_options_input( go_return_options( 'go_currency_name' ), 'checkbox', 'go_data_reset_currency', '', null, false, 'currency' );
+					go_options_input( go_return_options( 'go_bonus_currency_name' ), 'checkbox', 'go_data_reset_bonus_currency', '', null, false, 'bonus_currency' );
+					go_options_input( go_return_options( 'go_penalty_name' ), 'checkbox', 'go_data_reset_penalty', '', null, false, 'penalty' );
+					go_options_input( go_return_options( 'go_minutes_name' ), 'checkbox', 'go_data_reset_minutes', '', null, false, 'minutes' );
+					go_options_input( go_return_options( 'go_badges_name' ), 'checkbox', 'go_data_reset_badges', '', null, false, 'badges' );
 					go_options_input( 'All', 'checkbox', 'go_data_reset_all', '', null, false );
 					?>
 					<div class='go_options'>
@@ -367,7 +367,8 @@ if ( is_admin() ) {
                     <?php
                     go_share_js();
                     ?>
-                    Filename: <input type='text' name='go_export_fname' placeholder="<?php echo 'go_export_'.date( 'mdy' ); ?>" />.xml
+                    Filename: <input type='text' name='go_export_fname' placeholder="<?php echo 'go_export_'.date( 'mdy' ); ?>" />.xml<br />
+                    <input type='checkbox' name='go_export_maintain_tax' checked='checked'/> Maintain taxonomies?
                     <div id='go_share_tasks'>
                     	<div id='go_tasks_unfiltered_wrap'>
                             <h1><?php echo ucfirst( go_return_options( 'go_tasks_plural_name' ) ); ?></h1>
@@ -400,12 +401,12 @@ if ( is_admin() ) {
                                             if ( $count == 1 ) {
                                                 ?>
                                                 <h4><?php echo $taxonomy_data->label; ?></h4>
-                                                <input type='checkbox' name='go_export_task_tax[<?php echo $taxonomy_data->label; ?>]' class='go_task_tax_filter' value='all'  />All<br />
+                                                <input type='checkbox' name='go_export_task_tax[<?php echo esc_attr( $taxonomy_data->label ); ?>]' class='go_task_tax_filter' value='all' post_type='tasks'/>All<br />
                                                 <?php
                                                 $count++;
                                             }
                                             ?>
-                                            <input type='checkbox' value='<?php echo $taxonomy_term->name; ?>' class='go_task_tax_filter' tax='<?php echo $taxonomy_data->label; ?>' name='go_export_task_tax[<?php echo $taxonomy_data->label; ?>]' /><?php echo $taxonomy_term->name; ?><br />
+                                            <input type='checkbox' value='<?php echo esc_attr( $taxonomy_term->name ); ?>' class='go_task_tax_filter' tax='<?php echo esc_attr( $taxonomy_term->taxonomy ); ?>' name='go_export_task_tax[<?php echo esc_attr( $taxonomy_data->label ); ?>]' post_type='tasks'/><?php echo $taxonomy_term->name; ?><br />
                                             <?php
                                         }
                                     }
@@ -414,7 +415,7 @@ if ( is_admin() ) {
                             </div>
                         </div>
                         <div id='go_tasks_filtered_wrap'>
-                       		<h3>Filtered List</h3><div id='go_tasks_filtered'></div>
+                       		<h3>Filtered List</h3><div id='go_tasks_filtered' post_type='tasks'></div>
                         </div>
                     </div>
                     <div id='go_share_store'>
@@ -450,12 +451,13 @@ if ( is_admin() ) {
                                         if ( $count == 1 ) {
                                             ?>
                                             <h4><?php echo $taxonomy_data->label; ?></h4>
-                                            <input type='checkbox' name='go_export_store_tax[<?php echo $taxonomy_data->label; ?>]' class='go_store_tax_filter' value='all' /> All<br />
+                                            <input type='checkbox' name='go_export_store_tax[<?php echo esc_attr( $taxonomy_data->label ); ?>]' class='go_store_tax_filter' value='all' post_type='go_store'/> All<br />
                                             <?php
                                             $count++;
                                         }
                                         ?>
-                                        <input type='checkbox' value='<?php echo $taxonomy_term->name; ?>' class='go_store_tax_filter' tax='<?php echo $taxonomy_data->label; ?>' name='go_export_store_tax[<?php echo $taxonomy_data->label; ?>]'/><?php echo $taxonomy_term->name; ?><br />
+                                     
+                                        <input type='checkbox' value='<?php echo esc_attr( $taxonomy_term->name ); ?>' class='go_store_tax_filter' tax='<?php echo esc_attr( $taxonomy_term->taxonomy ); ?>' name='go_export_store_tax[<?php echo esc_attr( $taxonomy_data->label ); ?>]' post_type='go_store'/><?php echo $taxonomy_term->name; ?><br />
                                         <?php
                                     }
                                 }
@@ -464,10 +466,11 @@ if ( is_admin() ) {
                         </div>
                     </div>
                     <div id='go_store_filtered_wrap'>
-                        <h3>Filtered List</h3><div id='go_store_filtered'></div>
+                        <h3>Filtered List</h3><div id='go_store_filtered' post_type='go_store'></div>
                     </div>
                     <button onclick='go_export_data()' >Export</button>
                     <button onclick='go_import_data()' >Import</button>
+                    <input id='go_import_upload' type='file' />
                 </div><br />
 			<input type="submit" name="Submit" value="Save Options" />
 			<input type="hidden" name="action" value="update" />
@@ -894,14 +897,9 @@ function go_save_extra_profile_fields( $user_id ) {
 
 function go_export () {
 	$fname = $_POST['go_export_fname'].'.xml';
+	$maintain_tax = $_POST['go_export_maintain_tax'];
 	$task_ids = array_filter( $_POST['go_export_unfiltered_task_ids'] );
 	$store_item_ids = array_filter( $_POST['go_export_unfiltered_store_item_ids'] );
-	$task_filters = array_filter( $_POST['go_export_task_filters'] );
-	$store_filters = array_filter( $_POST['go_export_store_filters'] );
-	
-	print_r( $task_filters );
-	print_r( $store_filters );
-	
 	$export_ids = array_merge( $task_ids, $store_item_ids );
 	
 	$xml_document = new DOMDocument( '1.0', 'UTF-8' );
@@ -933,6 +931,22 @@ function go_export () {
 				$store_xml->appendChild( $item_xml );
 				break;
 		}
+		
+		if ( $maintain_tax ) {
+			$post_taxonomies = get_the_taxonomies( $post_id );
+			foreach ( $post_taxonomies as $taxonomy => $tax_info ) {
+				$post_terms = get_the_terms( $post_id, $taxonomy );
+				foreach ( $post_terms as $term ) {
+					$post_term_xml = $xml_document->createElement( $taxonomy, $term->name );
+					$post_term_xml->setAttribute( 'tax', 'true' );
+					if ( $post_type == 'tasks' ) {
+						$task_xml->appendChild( $post_term_xml );	
+					} elseif ( $post_type == 'go_store' ) {
+						$item_xml->appendChild( $post_term_xml );
+					}
+				}
+			}
+		}
 			
 		foreach( $post_custom as $key => $value ) {
 			if ( strpos( $key, 'go_' ) 	=== 0 ) {
@@ -944,6 +958,7 @@ function go_export () {
 				}
 			}
 		}
+		
 	}
 	
 	$xml_document->formatOutput = true;
@@ -956,14 +971,53 @@ function go_export () {
 		$xml_file = fopen( plugin_dir_path( __FILE__ )."/downloads/{$fname}", 'w+' );
 		fwrite( $xml_file, $xml );
 	}
-	
+	*/
 	$xml_info = array(
 		'url' => plugin_dir_url( __FILE__ )."go_download.php?go_export_fname={$_POST['go_export_fname']}",
 		'xml' => $xml
 	);
 	echo json_encode( $xml_info  );
-	*/
 	
+	
+	die();
+}
+
+function go_filtered_export_list () {
+	$filters = array_filter( $_POST['export_filters'] );
+	$post_type = $_POST['post_type'];
+	$already_displayed_posts = array();
+	
+	foreach ( $filters as $taxonomy => $terms ) {
+		
+		$terms = array_filter( $terms );
+		
+		$args = array(
+			'post_type' => $post_type,
+			'tax_query' => array(
+				array(
+					'taxonomy' => $taxonomy,
+					'field' => 'slug',
+					'terms' => $terms
+				)
+			)
+		);
+		
+		$filtered_posts = get_posts( $args );
+		foreach ( $filtered_posts as $filtered_post ) {
+			if ( ! in_array( $filtered_post->ID, $already_displayed_posts ) ) {
+				?>
+				<input type='checkbox' name='<?php echo ( $post_type == 'tasks' ) ? 'go_export_tasks[]' : 'go_export_store[]'; ?>' value='<?php echo $filtered_post->ID; ?>' checked="checked"/><?php echo $filtered_post->post_title?><br />
+				<?php
+				$already_displayed_posts[] = $filtered_post->ID;
+			}
+		}
+	}
+	
+	die();	
+}
+
+function go_import () {
+	$file = $_POST['go_xml'];
 	die();
 }
 

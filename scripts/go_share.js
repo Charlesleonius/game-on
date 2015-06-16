@@ -4,8 +4,8 @@ function go_export_data () {
 	
 	var export_unfiltered_task_ids = [''];
 	var export_unfiltered_store_item_ids = [''];
-	var export_task_filters = [''];
-	var export_store_filters = [''];
+	
+	var maintain_tax = jQuery( 'input[name="go_export_maintain_tax"]' ).is( ':checked' ) ? true : false;
 	
 	jQuery( 'input[name="go_export_tasks[]"]' ).each( function () {
 		if ( jQuery( this ).is( ':checked' ) && jQuery( this ).val() !== 'all' ) {
@@ -19,27 +19,6 @@ function go_export_data () {
 		}
 	});
 	
-	jQuery( '.go_task_tax_filter' ).each( function () {
-		if ( jQuery( this ).is( ':checked' ) && jQuery( this ).val() !== 'all' ) {
-			if ( ! ( jQuery( this ).attr( 'tax' ) in export_task_filters )  ) {
-				export_task_filters[ jQuery( this ).attr( 'tax' ) ] = [''];
-			}
-			export_task_filters[ jQuery( this ).attr( 'tax' ) ].push( jQuery( this ).val() );
-		}
-	});
-	
-	jQuery( '.go_store_tax_filter' ).each( function () {
-		if ( jQuery( this ).is( ':checked' ) && jQuery( this ).val() !== 'all' ) {
-			if ( ! ( jQuery( this ).attr( 'tax' ) in export_store_filters ) ) {
-				export_store_filters[ jQuery( this ).attr( 'tax' ) ] = [''];
-			}
-			export_store_filters[ jQuery( this ).attr( 'tax' ) ].push( jQuery( this ).val() );
-		}
-	});
-	
-	export_task_filters = jQuery.extend( {}, export_task_filters );
-	export_store_filters = jQuery.extend( {}, export_store_filters );
-	
 	jQuery.ajax({
 		type: 'POST',
 		url: MyAjax.ajaxurl,
@@ -48,8 +27,7 @@ function go_export_data () {
 			go_export_fname: fname,
 			go_export_unfiltered_task_ids: export_unfiltered_task_ids,
 			go_export_unfiltered_store_item_ids: export_unfiltered_store_item_ids,
-			go_export_task_filters: export_task_filters,
-			go_export_store_filters: export_store_filters
+			go_export_maintain_tax: maintain_tax
 		},
 		success: function ( xml_info ) {
 			jQuery( 'input[name="go_export_fname"]' ).val( '' );
@@ -57,10 +35,10 @@ function go_export_data () {
 			jQuery( 'input[name="go_export_store[]"]' ).prop( 'checked', false );
 			jQuery( '.go_task_tax_filter' ).prop( 'checked', false );
 			jQuery( '.go_store_tax_filter' ).prop( 'checked', false );
+			jQuery( '#go_tasks_filtered' ).empty();
+			jQuery( '#go_store_filtered' ).empty();
 			
-			console.log( xml_info );
-			
-			/*xml_info = JSON.parse( xml_info );
+			xml_info = JSON.parse( xml_info );
 			var go_download_form = document.createElement( 'form' );
 			go_download_form.setAttribute( 'method', 'post' );
 			go_download_form.setAttribute( 'action', xml_info['url'] );
@@ -77,11 +55,26 @@ function go_export_data () {
 			go_download_form.submit();
 			
 			jQuery( '.go_xml_form' ).remove();
-			*/
 		}
 	});
 }
 
 function go_import_data () {
-	
+	jQuery( '#go_import_upload' ).click();
+	jQuery( ':file' ).change( function () {
+		var go_xml = this.files[0];
+		fname = go_xml.name;
+		fsize = go_xml.size;
+		ftype = go_xml.type;
+		console.log(go_xml);
+		if ( fname.length < 1 ) {
+			return false;
+		} else if ( fsize > 100000000 ) {
+			alert( 'File size too large.' );	
+		} else if ( ftype != 'text/xml' ) {
+			alert( 'Wrong file type.' );
+		} else {
+			
+		}
+	});
 }
