@@ -963,15 +963,7 @@ function go_export () {
 	
 	$xml_document->formatOutput = true;
 	$xml = $xml_document->saveXML();
-	/*if ( ! is_dir( plugin_dir_path( __FILE__ ).'/downloads/' ) ) {
-		mkdir( plugin_dir_path( __FILE__ ).'/downloads/', 0777 );
-	}
 	
-	if ( is_dir( plugin_dir_path( __FILE__ ).'/downloads/' ) ) {
-		$xml_file = fopen( plugin_dir_path( __FILE__ )."/downloads/{$fname}", 'w+' );
-		fwrite( $xml_file, $xml );
-	}
-	*/
 	$xml_info = array(
 		'url' => plugin_dir_url( __FILE__ )."go_download.php?go_export_fname={$_POST['go_export_fname']}",
 		'xml' => $xml
@@ -1017,7 +1009,67 @@ function go_filtered_export_list () {
 }
 
 function go_import () {
-	$file = $_POST['go_xml'];
+	$xml_obj = simplexml_load_string( file_get_contents( $_FILES['go_import_file']['tmp_name'] ) );
+
+	if ( ! empty ( $xml_obj->tasks ) ) {
+		foreach( $xml_obj->tasks->task as $task ) {
+			$post_title = $task->attributes()->post_title;
+			$post_type = $task->attributes()->post_type;
+			$post_slug = strtolower( str_replace(' ', '-', $post_title ) );
+			$post_id = wp_insert_post( 
+				array(
+					'post_title' => $post_title,
+					'post_type' => $post_type,
+					'post_name' => $post_slug,
+					'post_content' => '',
+					'post_excerpt' => ''
+				), true
+			);
+			print_r($post_id);
+			foreach( $task->children() as $tasks_info ) {
+				if ( $tasks_info->attributes()->tax ) {
+					$tax_name = $tasks_info->getName();
+					$tax_term = $tasks_info[0];
+					wp_insert_term( $tax_term, $tax_name );
+					wp_set_object_terms( $post_id, $tax_term, $tax_name, true );
+				} else {
+					$custom_key = $tasks_info->getName();
+					$custom_value = $tasks_info[0];
+					update_post_meta( $post_id, $custom_key, $custom_value );
+				}
+			}
+		}
+	}
+	
+	if ( ! empty ( $xml_obj->items ) ) {
+		foreach( $xml_obj->items->item as $item ) {
+			$post_title = $item->attributes()->post_title;
+			$post_type = $item->attributes()->post_type;
+			$post_slug = strtolower( str_replace(' ', '-', $post_title ) );
+			$post_id = wp_insert_post( 
+				array(
+					'post_title' => $post_title,
+					'post_type' => $post_type,
+					'post_name' => $post_slug,
+					'post_content' => '',
+					'post_excerpt' => ''
+				), true
+			);
+			print_r($post_id);
+			foreach( $item->children() as $items_info ) {
+				if ( $items_info->attributes()->tax ) {
+					$tax_name = $items_info->getName();
+					$tax_term = $items_info[0];
+					wp_insert_term( $tax_term, $tax_name );
+					wp_set_object_terms( $post_id, $tax_term, $tax_name, true );
+				} else {
+					$custom_key = $items_info->getName();
+					$custom_value = $items_info[0];
+					update_post_meta( $post_id, $custom_key, $custom_value );
+				}
+			}
+		}
+	}
 	die();
 }
 

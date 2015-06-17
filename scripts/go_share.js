@@ -75,14 +75,18 @@ function go_import_data () {
 		} else {
 			xml_fdata = new FormData();
 			xml_fdata.append( 'go_import_file', go_xml );
-			var xhr = new XMLHttpRequest();
-			xhr.open( 'POST', PluginDir.url + '/go_upload.php', true );
-			xhr.onload = function () {
-				if ( this.status == 200 ) {
-					console.log( this.response )
+			xml_fdata.append( 'action', 'go_import' );
+			jQuery.ajax({
+				type: 'POST',
+				url: MyAjax.ajaxurl,
+				processData: false,
+				contentType: false,
+				data: xml_fdata,
+				success: function (response) {
+					console.log( response );
+					//location.reload();
 				}
-			}
-			xhr.send( xml_fdata )
+			});
 		}
 	});
 }
