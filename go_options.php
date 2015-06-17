@@ -367,12 +367,14 @@ if ( is_admin() ) {
                     <?php
                     go_share_js();
                     ?>
-                    Filename: <input type='text' name='go_export_fname' placeholder="<?php echo 'go_export_'.date( 'mdy' ); ?>" />.xml<br />
-                    <input type='checkbox' name='go_export_maintain_tax' checked='checked'/> Maintain taxonomies?
-                    <div id='go_share_tasks'>
-                    	<div id='go_tasks_unfiltered_wrap'>
+					<div class='go_share_wrap' >
+						Filename: <input type='text' name='go_export_fname' placeholder="<?php echo 'go_export_'.date( 'mdy' ); ?>" />.xml<br />
+						<input type='checkbox' name='go_export_maintain_tax' checked='checked'/> Maintain taxonomies?
+                    </div>
+					<div id='go_share_tasks' class='go_share_wrap'>
+                    	<div id='go_tasks_unfiltered_wrap' class='go_share_wrap'>
                             <h1><?php echo ucfirst( go_return_options( 'go_tasks_plural_name' ) ); ?></h1>
-                            <h3>Unfiltered</h3><div id='go_tasks_unfiltered'>
+                            <h3>Unfiltered list</h3><div id='go_tasks_unfiltered'>
                                 <input type='checkbox' name='go_export_tasks[]' value='all'/>All<br />
                                 <?php
                                 $args = array( 
@@ -388,7 +390,7 @@ if ( is_admin() ) {
                                 ?>
                             </div>
                         </div>
-                        <div id='go_tasks_filters_wrap'>
+                        <div id='go_tasks_filters_wrap' class='go_share_wrap go_share_filters'>
                             <h3>Filters</h3><div id='go_tasks_filters'>
                                 <?php 
                                 $task_taxonomies = get_object_taxonomies( 'tasks' );
@@ -414,14 +416,14 @@ if ( is_admin() ) {
                                 ?>
                             </div>
                         </div>
-                        <div id='go_tasks_filtered_wrap'>
+                        <div id='go_tasks_filtered_wrap' class='go_share_wrap'>
                        		<h3>Filtered List</h3><div id='go_tasks_filtered' post_type='tasks'></div>
                         </div>
                     </div>
-                    <div id='go_share_store'>
-                    	<div id='go_store_unfiltered_wrap'>
+                    <div id='go_share_store' class='go_share_wrap'>
+                    	<div id='go_store_unfiltered_wrap' class='go_share_wrap'>
                             <h1><?php echo ucfirst( go_return_options( 'go_store_name' ) ); ?></h1>
-                             <h3>Unfiltered</h3><div id='go_store_unfiltered'>
+                             <h3>Unfiltered List</h3><div id='go_store_unfiltered'>
                                 <input type='checkbox' name='go_export_store[]' value='all' />All<br />
                                 <?php
                                 $args = array( 
@@ -437,40 +439,42 @@ if ( is_admin() ) {
                                 ?>
                             </div>
                         </div>
-                    </div>
-                    <div id='go_store_filters_wrap'>
-                        <h3>Filters</h3><div id='go_store_filters'>
-                            <?php 
-                            $store_taxonomies = get_object_taxonomies( 'go_store' );
-                            $store_taxonomy_terms = get_terms( $store_taxonomies );
-                            foreach ( $store_taxonomies as $taxonomy ) {
-                                $count = 1;
-                                foreach ( $store_taxonomy_terms as $taxonomy_term ) {
-                                    if ( $taxonomy_term->taxonomy == $taxonomy) {
-                                        $taxonomy_data = get_taxonomy( $taxonomy );
-                                        if ( $count == 1 ) {
-                                            ?>
-                                            <h4><?php echo $taxonomy_data->label; ?></h4>
-                                            <input type='checkbox' name='go_export_store_tax[<?php echo esc_attr( $taxonomy_data->label ); ?>]' class='go_store_tax_filter' value='all' post_type='go_store'/> All<br />
-                                            <?php
-                                            $count++;
-                                        }
-                                        ?>
-                                     
-                                        <input type='checkbox' value='<?php echo esc_attr( $taxonomy_term->name ); ?>' class='go_store_tax_filter' tax='<?php echo esc_attr( $taxonomy_term->taxonomy ); ?>' name='go_export_store_tax[<?php echo esc_attr( $taxonomy_data->label ); ?>]' post_type='go_store'/><?php echo $taxonomy_term->name; ?><br />
-                                        <?php
-                                    }
-                                }
-                            }
-                            ?>
-                        </div>
-                    </div>
-                    <div id='go_store_filtered_wrap'>
-                        <h3>Filtered List</h3><div id='go_store_filtered' post_type='go_store'></div>
-                    </div>
-                    <button onclick='go_export_data()' >Export</button>
-                    <button onclick='go_import_data()' >Import</button>
-                    <input id='go_import_upload' name='go_import_file'type='file' />
+						<div id='go_store_filters_wrap' class='go_share_wrap go_share_filters'>
+							<h3>Filters</h3><div id='go_store_filters'>
+								<?php 
+								$store_taxonomies = get_object_taxonomies( 'go_store' );
+								$store_taxonomy_terms = get_terms( $store_taxonomies );
+								foreach ( $store_taxonomies as $taxonomy ) {
+									$count = 1;
+									foreach ( $store_taxonomy_terms as $taxonomy_term ) {
+										if ( $taxonomy_term->taxonomy == $taxonomy) {
+											$taxonomy_data = get_taxonomy( $taxonomy );
+											if ( $count == 1 ) {
+												?>
+												<h4><?php echo $taxonomy_data->label; ?></h4>
+												<input type='checkbox' name='go_export_store_tax[<?php echo esc_attr( $taxonomy_data->label ); ?>]' class='go_store_tax_filter' value='all' post_type='go_store'/> All<br />
+												<?php
+												$count++;
+											}
+											?>
+										 
+											<input type='checkbox' value='<?php echo esc_attr( $taxonomy_term->name ); ?>' class='go_store_tax_filter' tax='<?php echo esc_attr( $taxonomy_term->taxonomy ); ?>' name='go_export_store_tax[<?php echo esc_attr( $taxonomy_data->label ); ?>]' post_type='go_store'/><?php echo $taxonomy_term->name; ?><br />
+											<?php
+										}
+									}
+								}
+								?>
+							</div>
+						</div>
+						<div id='go_store_filtered_wrap' class='go_share_wrap'>
+							<h3>Filtered List</h3><div id='go_store_filtered' post_type='go_store'></div>
+						</div>
+					</div>
+					<div id='go_share_buttons' class='go_share_wrap'>
+						<button onclick='go_export_data()' >Export</button>
+						<button onclick='go_import_data()' >Import</button>
+						<input id='go_import_upload' name='go_import_file'type='file' />
+					</div>
                 </div><br />
 			<input type="submit" name="Submit" value="Save Options" />
 			<input type="hidden" name="action" value="update" />
@@ -950,7 +954,7 @@ function go_export () {
 			
 		foreach( $post_custom as $key => $value ) {
 			if ( strpos( $key, 'go_' ) 	=== 0 ) {
-				$post_custom_xml = $xml_document->createElement( $key, serialize( $value ) );
+				$post_custom_xml = $xml_document->createElement( $key, $value[0] );
 				if ( $post_type == 'tasks' ) {
 					$task_xml->appendChild( $post_custom_xml );	
 				} elseif ( $post_type == 'go_store' ) {
@@ -1009,38 +1013,85 @@ function go_filtered_export_list () {
 }
 
 function go_import () {
+	
+	// Load XML string from uploaded file into SimpleXML object
 	$xml_obj = simplexml_load_string( file_get_contents( $_FILES['go_import_file']['tmp_name'] ) );
 
+	// If there is XML relating to tasks
 	if ( ! empty ( $xml_obj->tasks ) ) {
+		
+		/* 
+		Loop through the SimpleXML object for the list of tasks 
+		Each task is a new SimpleXML object
+		*/
 		foreach( $xml_obj->tasks->task as $task ) {
+			
+			// Grab attributes of SimpleXML object 
 			$post_title = $task->attributes()->post_title;
 			$post_type = $task->attributes()->post_type;
+			
+			// Generate required post slug for WP insert post
 			$post_slug = strtolower( str_replace(' ', '-', $post_title ) );
+			
+			// Insert post and return new post id
 			$post_id = wp_insert_post( 
 				array(
 					'post_title' => $post_title,
 					'post_type' => $post_type,
 					'post_name' => $post_slug,
+					'post_status' => 'publish',
 					'post_content' => '',
 					'post_excerpt' => ''
-				), true
+				)
 			);
-			print_r($post_id);
+			
+			/* 
+			Loop through child nodes of task
+			Child nodes of a task contain its taxonomy & custom meta field info
+			Child nodes are also SimpleXML objects
+			*/
 			foreach( $task->children() as $tasks_info ) {
+				
+				// If child node is taxonomy info
 				if ( $tasks_info->attributes()->tax ) {
-					$tax_name = $tasks_info->getName();
-					$tax_term = $tasks_info[0];
-					wp_insert_term( $tax_term, $tax_name );
+					
+					/* 
+					Grab child node's name & content
+					Child node's name is the taxonomy, its content is the taxonomy term
+					This info needs to be cast to a string in order to properly insert into WP install
+					*/ 
+					$tax_name = (string) $tasks_info->getName();
+					$tax_term = (string) $tasks_info[0];
+					
+					if ( ! term_exists ( $tax_term, $tax_name) ) {
+						wp_insert_term( $tax_term, $tax_name );
+					}
 					wp_set_object_terms( $post_id, $tax_term, $tax_name, true );
+					
+				// If child node is not taxonomy info, it is post meta info
 				} else {
-					$custom_key = $tasks_info->getName();
-					$custom_value = $tasks_info[0];
+					
+					/* 
+					Grab child node's name & content
+					Child node's name is the post meta key, its content is the post meta value
+					This info needs to be cast to a string in order to properly insert into WP install
+					*/ 
+					$custom_key = (string) $tasks_info->getName();
+					$custom_value = (string) $tasks_info[0];
+					
+					/* 
+					Checks if string is serialized array
+					Important because a string of serialized array data is different from an actual serialized array
+					E.g. s:29:"a:3:{i:0;N;i:1;N;i:2;s:0:"";}" vs. a:3:{i:0;N;i:1;N;i:2;s:0:"";}
+					*/ 
+					$custom_value = maybe_unserialize( $custom_value );
 					update_post_meta( $post_id, $custom_key, $custom_value );
 				}
 			}
 		}
 	}
 	
+	// Refer to above comments
 	if ( ! empty ( $xml_obj->items ) ) {
 		foreach( $xml_obj->items->item as $item ) {
 			$post_title = $item->attributes()->post_title;
@@ -1051,20 +1102,23 @@ function go_import () {
 					'post_title' => $post_title,
 					'post_type' => $post_type,
 					'post_name' => $post_slug,
+					'post_status' => 'publish',
 					'post_content' => '',
 					'post_excerpt' => ''
 				), true
 			);
-			print_r($post_id);
 			foreach( $item->children() as $items_info ) {
 				if ( $items_info->attributes()->tax ) {
-					$tax_name = $items_info->getName();
-					$tax_term = $items_info[0];
-					wp_insert_term( $tax_term, $tax_name );
+					$tax_name = (string) $items_info->getName();
+					$tax_term = (string) $items_info[0];
+					if ( ! term_exists ( $tax_term, $tax_name) ) {
+						wp_insert_term( $tax_term, $tax_name );
+					}
 					wp_set_object_terms( $post_id, $tax_term, $tax_name, true );
 				} else {
-					$custom_key = $items_info->getName();
-					$custom_value = $items_info[0];
+					$custom_key = (string) $items_info->getName();
+					$custom_value = (string) $items_info[0];
+					$custom_value = maybe_unserialize( $custom_value );
 					update_post_meta( $post_id, $custom_key, $custom_value );
 				}
 			}

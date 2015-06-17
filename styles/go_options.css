@@ -362,19 +362,34 @@ input[type="submit"] {
 	width: 100%;
 }
 
-#go_tasks_unfiltered_wrap, #go_tasks_filters_wrap, #go_tasks_filtered_wrap {
-	
-}
-
-#go_tasks_unfiltered, #go_tasks_filters, #go_tasks_filtered, #go_store_unfiltered {
+.go_share_wrap {
 	display: inline-block;
+	float: left;
 }
 
-#go_tasks_filters {
-	display: inline-block;
+#go_share_tasks, #go_share_store, #go_share_buttons {
+	clear: left;
+	width: 100%;
 }
 
-#go_import_upload{
+#go_share_tasks {
+	padding-bottom: 10px;
+	border-bottom: 1px solid rgb(221, 221, 221);
+}
+
+#go_share_store {
+	margin-bottom: 10px;
+}
+
+#go_tasks_unfiltered_wrap, #go_store_unfiltered_wrap {
+	width: 35%;
+}
+
+.go_share_filters {
+	width: 35%;
+}
+
+#go_import_upload {
 	display: none !important;	
 }
 
