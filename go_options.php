@@ -470,7 +470,7 @@ if ( is_admin() ) {
                     </div>
                     <button onclick='go_export_data()' >Export</button>
                     <button onclick='go_import_data()' >Import</button>
-                    <input id='go_import_upload' type='file' />
+                    <input id='go_import_upload' name='go_import_file'type='file' />
                 </div><br />
 			<input type="submit" name="Submit" value="Save Options" />
 			<input type="hidden" name="action" value="update" />

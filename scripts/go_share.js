@@ -66,7 +66,6 @@ function go_import_data () {
 		fname = go_xml.name;
 		fsize = go_xml.size;
 		ftype = go_xml.type;
-		console.log(go_xml);
 		if ( fname.length < 1 ) {
 			return false;
 		} else if ( fsize > 100000000 ) {
@@ -74,7 +73,16 @@ function go_import_data () {
 		} else if ( ftype != 'text/xml' ) {
 			alert( 'Wrong file type.' );
 		} else {
-			
+			xml_fdata = new FormData();
+			xml_fdata.append( 'go_import_file', go_xml );
+			var xhr = new XMLHttpRequest();
+			xhr.open( 'POST', PluginDir.url + '/go_upload.php', true );
+			xhr.onload = function () {
+				if ( this.status == 200 ) {
+					console.log( this.response )
+				}
+			}
+			xhr.send( xml_fdata )
 		}
 	});
 }
