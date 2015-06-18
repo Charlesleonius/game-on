@@ -82,9 +82,8 @@ function go_import_data () {
 				processData: false,
 				contentType: false,
 				data: xml_fdata,
-				success: function (response) {
-					console.log( response );
-					//location.reload();
+				success: function () {
+					location.reload();
 				}
 			});
 		}
