@@ -379,7 +379,8 @@ if ( is_admin() ) {
                                 <?php
                                 $args = array( 
                                     'post_status' => 'publish',
-                                    'post_type' => 'tasks'
+                                    'post_type' => 'tasks',
+									'posts_per_page' => -1
                                 );
                                 $tasks = get_posts ( $args );
                                 foreach ( $tasks as $task ) {
@@ -428,7 +429,8 @@ if ( is_admin() ) {
                                 <?php
                                 $args = array( 
                                     'post_status' => 'publish',
-                                    'post_type' => 'go_store'
+                                    'post_type' => 'go_store',
+									'posts_per_page' => -1
                                 );
                                 $items = get_posts ( $args );
                                 foreach ( $items as $item ) {
@@ -995,7 +997,8 @@ function go_filtered_export_list () {
 					'field' => 'slug',
 					'terms' => $terms
 				)
-			)
+			),
+			'posts_per_page' => -1
 		);
 		
 		$filtered_posts = get_posts( $args );

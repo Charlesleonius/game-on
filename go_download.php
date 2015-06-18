@@ -8,7 +8,7 @@ header( 'Expires: 0' );
 header( 'Cache-Control: must-revalidate' );
 header( 'Pragma: public' );
 
-$xml = $_POST['go_xml'];
+$xml = stripslashes( $_POST['go_xml'] );
 
 echo $xml;
 

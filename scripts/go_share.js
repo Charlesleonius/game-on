@@ -8,13 +8,13 @@ function go_export_data () {
 	var maintain_tax = jQuery( 'input[name="go_export_maintain_tax"]' ).is( ':checked' ) ? true : false;
 	
 	jQuery( 'input[name="go_export_tasks[]"]' ).each( function () {
-		if ( jQuery( this ).is( ':checked' ) && jQuery( this ).val() !== 'all' ) {
+		if ( jQuery( this ).is( ':checked' ) && jQuery( this ).val() !== 'all' && jQuery.inArray( jQuery( this ).val(), export_unfiltered_task_ids ) == -1 ) {
 			export_unfiltered_task_ids.push( jQuery( this ).val() );
 		}
 	});
 	
 	jQuery( 'input[name="go_export_store[]"]' ).each( function () {
-		if ( jQuery( this ).is( ':checked' ) && jQuery( this ).val() !== 'all' ) {
+		if ( jQuery( this ).is( ':checked' ) && jQuery( this ).val() !== 'all' && jQuery.inArray( jQuery( this ).val() , export_unfiltered_store_item_ids ) == -1 ) {
 			export_unfiltered_store_item_ids.push( jQuery( this ).val() );
 		}
 	});
@@ -68,7 +68,7 @@ function go_import_data () {
 		ftype = go_xml.type;
 		if ( fname.length < 1 ) {
 			return false;
-		} else if ( fsize > 100000000 ) {
+		} else if ( fsize > 10000000 ) {
 			alert( 'File size too large.' );	
 		} else if ( ftype != 'text/xml' ) {
 			alert( 'Wrong file type.' );
