@@ -1,12 +1,13 @@
 <?php
 
 if ( is_admin() ) {
+
 	function go_opt_help( $field, $title, $video_url = null ) {
 		echo "<a id='go_help_{$field}' class='go_opt_help' onclick='go_display_help_video(\'{$video_url}\' );' title='{$title}'>?</a>";
-		
 	}
 	
 	add_action( 'admin_enqueue_scripts', 'go_opt_style' );
+
 	function go_opt_style () {
 		wp_register_style( 'go_opt_css', plugins_url( 'styles/go_options.css', __FILE__ ), false, '1.0.0' );
 		wp_enqueue_style ( 'go_opt_css' );
@@ -32,7 +33,7 @@ if ( is_admin() ) {
                     <span class='go_options_help <?php if ( !$help ) { echo 'go_options_no_help'; } ?>' href='javascript:;' onclick=''>?</span>
                 </div>
              </div>
-         </a>
+        </a>
         <?php
 	}
 	
@@ -79,11 +80,11 @@ if ( is_admin() ) {
 			wp_nonce_field( 'update-options' ); 
 			?>
 			<div id='go_options_admin_email_wrap' class='go_options_wrap'>
-			<?php
-			go_options_input( 'Admin Email','text', 'go_admin_email', 'http://maclab.guhsd.net/go/video/options/adminEmail.mp4', 'IMPORTANT: Enter your email and click the Save Options button' );
-			?>
+				<?php
+				go_options_input( 'Admin Email','text', 'go_admin_email', 'http://maclab.guhsd.net/go/video/options/adminEmail.mp4', 'IMPORTANT: Enter your email and click the Save Options button' );
+				?>
 			</div>
-             <div class='go_options_accordion_wrap' opt='0'><?php go_options_accordion_help( 'http://maclab.guhsd.net/go/video/options/namingConventions.mp4', 'Customize the names used for tasks, points, currency, etc.' ); ?><div class='go_options_accordion'>Naming Conventions<div class='go_triangle_container'><div class='go_options_triangle'></div></div></div></div>
+            <div class='go_options_accordion_wrap' opt='0'><?php go_options_accordion_help( 'http://maclab.guhsd.net/go/video/options/namingConventions.mp4', 'Customize the names used for tasks, points, currency, etc.' ); ?><div class='go_options_accordion'>Naming Conventions<div class='go_triangle_container'><div class='go_options_triangle'></div></div></div></div>
              	<div id='go_options_naming_conventions_wrap' class='go_options_wrap'>
              		<?php 
 						go_options_field( 'Tasks', 2, array( 1 => 'go_tasks_name', 2 => 'go_tasks_plural_name' ), 'http://maclab.guhsd.net/go/video/options/tasks.mp4', 'Name your assignments' ); 
@@ -107,7 +108,7 @@ if ( is_admin() ) {
 						
 					?>
                 </div>
-             <div class='go_options_accordion_wrap' opt='1'><?php go_options_accordion_help( 'http://maclab.guhsd.net/go/video/options/lootPresets.mp4', 'Customize rewards earned within your game' ); ?><div class='go_options_accordion'>Loot Presets<div class='go_triangle_container'><div class='go_options_triangle'></div></div></div></div>
+            <div class='go_options_accordion_wrap' opt='1'><?php go_options_accordion_help( 'http://maclab.guhsd.net/go/video/options/lootPresets.mp4', 'Customize rewards earned within your game' ); ?><div class='go_options_accordion'>Loot Presets<div class='go_triangle_container'><div class='go_options_triangle'></div></div></div></div>
 				<div id='go_options_loot_presets_wrap' class='go_options_wrap'>
 					<?php
 						$presets = get_option( 'go_presets',false );
@@ -175,7 +176,7 @@ if ( is_admin() ) {
 						<button type="button" id='go_save_presets' class='go_options_button'>Save Presets</button>
 					</div>
 				</div>
-			 <div class='go_options_accordion_wrap' opt='2'><?php go_options_accordion_help( 'http://maclab.guhsd.net/go/video/options/adminBar.mp4', 'Options for the Admin Bar ' ); ?><div class='go_options_accordion'>Admin Bar<div class='go_triangle_container'><div class='go_options_triangle'></div></div></div></div>
+			<div class='go_options_accordion_wrap' opt='2'><?php go_options_accordion_help( 'http://maclab.guhsd.net/go/video/options/adminBar.mp4', 'Options for the Admin Bar ' ); ?><div class='go_options_accordion'>Admin Bar<div class='go_triangle_container'><div class='go_options_triangle'></div></div></div></div>
 				<div id='go_options_admin_bar_wrap' class='go_options_wrap'>
 					<?php 
 					go_options_input( 'Display', 'checkbox', 'go_admin_bar_display_switch', 'http://maclab.guhsd.net/go/video/options/adminBarDisplay.mp4', 'Show login option in admin bar (recommended)' );
@@ -184,7 +185,7 @@ if ( is_admin() ) {
 					go_options_input( 'Minutes Only', 'checkbox', 'go_admin_bar_add_minutes_switch', 'http://maclab.guhsd.net/go/video/options/adminBarAddMinutesOnly.mp4', 'SAMPLE TEXT' );
 					?>
 				</div>
-			 <div class='go_options_accordion_wrap' opt='3'><?php go_options_accordion_help( 'http://maclab.guhsd.net/go/video/options/levels.mp4', 'Customize names, numbers, and award badges' ); ?><div class='go_options_accordion'><?php echo go_return_options( 'go_level_plural_names' ); ?><div class='go_triangle_container'><div class='go_options_triangle'></div></div></div></div>
+			<div class='go_options_accordion_wrap' opt='3'><?php go_options_accordion_help( 'http://maclab.guhsd.net/go/video/options/levels.mp4', 'Customize names, numbers, and award badges' ); ?><div class='go_options_accordion'><?php echo go_return_options( 'go_level_plural_names' ); ?><div class='go_triangle_container'><div class='go_options_triangle'></div></div></div></div>
 				<div id='go_options_levels_wrap' class='go_options_wrap'>
 					<?php
 					$ranks = get_option( 'go_ranks',false );
@@ -263,7 +264,7 @@ if ( is_admin() ) {
 						<button type="button" id='go_fix_levels' class='go_options_button'>Fix <?php echo $plural_rank_name; ?></button>
 					</div>
 				</div>
-			 <div class='go_options_accordion_wrap' opt='4'><?php go_options_accordion_help( 'http://maclab.guhsd.net/go/video/options/seatingChart.mp4', 'Customize user info to suit your needs' ); ?><div class='go_options_accordion'><?php echo go_return_options( 'go_organization_name' ); ?><div class='go_triangle_container'><div class='go_options_triangle'></div></div></div></div>
+			<div class='go_options_accordion_wrap' opt='4'><?php go_options_accordion_help( 'http://maclab.guhsd.net/go/video/options/seatingChart.mp4', 'Customize user info to suit your needs' ); ?><div class='go_options_accordion'><?php echo go_return_options( 'go_organization_name' ); ?><div class='go_triangle_container'><div class='go_options_triangle'></div></div></div></div>
 				<div id='go_options_seating_chart_wrap' class='go_options_wrap'>
 					<?php
 					$class_a = get_option( 'go_class_a' );
@@ -304,7 +305,7 @@ if ( is_admin() ) {
 						<button type="button" class='go_add_computer'>+</button>
 					</div>
 				</div>
-			 <div class='go_options_accordion_wrap' opt='5'><?php go_options_accordion_help( 'http://maclab.guhsd.net/go/video/options/profession.mp4', 'Optional grouping system' ); ?><div class='go_options_accordion'><?php echo go_return_options( 'go_focus_name' ); ?><div class='go_triangle_container'><div class='go_options_triangle'></div></div></div></div>
+			<div class='go_options_accordion_wrap' opt='5'><?php go_options_accordion_help( 'http://maclab.guhsd.net/go/video/options/profession.mp4', 'Optional grouping system' ); ?><div class='go_options_accordion'><?php echo go_return_options( 'go_focus_name' ); ?><div class='go_triangle_container'><div class='go_options_triangle'></div></div></div></div>
 				<div id='go_options_profession_wrap' class='go_options_wrap'>
 					<?php
 					go_options_input( 'Setting', 'checkbox', 'go_focus_switch','http://maclab.guhsd.net/go/video/options/professionSwitch.mp4', 'Enable groups (off by default)' );
@@ -363,19 +364,21 @@ if ( is_admin() ) {
 					</div>
 				</div>
             <div class='go_options_accordion_wrap' opt='7'><?php go_options_accordion_help( 'http://maclab.guhsd.net/go/video/options/exportImport.mp4', 'Export/Import Game On content' ); ?><div class='go_options_accordion'>Export/Import<div class='go_triangle_container'><div class='go_options_triangle'></div></div></div></div>
-                <div id='go_share_wrap' class='go_options_wrap'>
+           		<div id='go_share_wrap' class='go_options_wrap'>
                     <?php
                     go_share_js();
                     ?>
 					<div class='go_share_wrap' >
-						Filename: <input type='text' name='go_export_fname' placeholder="<?php echo 'go_export_'.date( 'mdy' ); ?>" />.xml<br />
+						Filename: <input type='text' name='go_export_fname' placeholder="<?php echo 'go_export_'.date( 'mdy' ); ?>" />.xml<br /></br>
 						<input type='checkbox' name='go_export_maintain_tax' checked='checked'/> Maintain taxonomies?
                     </div>
 					<div id='go_share_tasks' class='go_share_wrap'>
-                    	<div id='go_tasks_unfiltered_wrap' class='go_share_wrap'>
-                            <h1><?php echo ucfirst( go_return_options( 'go_tasks_plural_name' ) ); ?></h1>
-                            <h3>Unfiltered list</h3><div id='go_tasks_unfiltered'>
-                                <input type='checkbox' name='go_export_tasks[]' value='all'/>All<br />
+                    	<div>
+                        	<h1><?php echo ucfirst( go_return_options( 'go_tasks_plural_name' ) ); ?></h1>
+                        </div>
+                        <div style="width: 99%;" id= "go_share_wrap" >
+	 						<div style="float: left; width: 33%;">
+	 							<h3>Unfiltered List</h3> <input type='checkbox' name='go_export_tasks[]' value='all'/>All<br />
                                 <?php
                                 $args = array( 
                                     'post_status' => 'publish',
@@ -389,10 +392,13 @@ if ( is_admin() ) {
                                     <?php	
                                 }
                                 ?>
-                            </div>
-                        </div>
-                        <div id='go_tasks_filters_wrap' class='go_share_wrap go_share_filters'>
-                            <h3>Filters</h3><div id='go_tasks_filters'>
+                        	</div>
+	 						<div style="float: left; width: 33%;"><h3>Filters</h3></div>
+	 						<div style="float: left; width: 33%;"><h3>Filtered List</h3></div>
+ 	 						<br style="clear: left;" />
+						</div>
+                    </div>
+                    <div id='go_tasks_filters_wrap' class='go_share_wrap go_share_filters'>
                                 <?php 
                                 $task_taxonomies = get_object_taxonomies( 'tasks' );
                                 $task_taxonomy_terms = get_terms( $task_taxonomies );
@@ -415,34 +421,31 @@ if ( is_admin() ) {
                                     }
                                 }
                                 ?>
-                            </div>
-                        </div>
-                        <div id='go_tasks_filtered_wrap' class='go_share_wrap'>
-                       		<h3>Filtered List</h3><div id='go_tasks_filtered' post_type='tasks'></div>
-                        </div>
                     </div>
-                    <div id='go_share_store' class='go_share_wrap'>
-                    	<div id='go_store_unfiltered_wrap' class='go_share_wrap'>
-                            <h1><?php echo ucfirst( go_return_options( 'go_store_name' ) ); ?></h1>
-                             <h3>Unfiltered List</h3><div id='go_store_unfiltered'>
-                                <input type='checkbox' name='go_export_store[]' value='all' />All<br />
-                                <?php
-                                $args = array( 
-                                    'post_status' => 'publish',
-                                    'post_type' => 'go_store',
+                    </br>
+                    </br>
+                    <h1><?php echo ucfirst( go_return_options( 'go_store_name' ) ); ?></h1>
+                    <div style="width: 99%;" id= "go_share_wrap" >
+	 					<div style="float: left; width: 33%;">
+	 						<h3>Unfiltered List</h3>
+	 						<div id='go_store_unfiltered'><input type='checkbox' name='go_export_store[]' value='all' />All<br/>
+                            	<?php
+	                            $args = array( 
+	                                'post_status' => 'publish',
+	                                'post_type' => 'go_store',
 									'posts_per_page' => -1
-                                );
-                                $items = get_posts ( $args );
-                                foreach ( $items as $item ) {
-                                    ?>
-                                       <input type='checkbox' name='go_export_store[]' value='<?php echo $item->ID; ?>' /><?php echo get_the_title( $item->ID ); ?><br />
-                                    <?php	
-                                }
-                                ?>
-                            </div>
-                        </div>
-						<div id='go_store_filters_wrap' class='go_share_wrap go_share_filters'>
-							<h3>Filters</h3><div id='go_store_filters'>
+	                            );
+	                           	$items = get_posts ( $args );
+	                            foreach ( $items as $item ) {
+	                                ?>
+	                                <input type='checkbox' name='go_export_store[]' value='<?php echo $item->ID; ?>' /><?php echo get_the_title( $item->ID ); ?><br />
+	                            	<?php	
+	                            }
+	                            ?>
+	                        </div>
+	                    </div>
+	 					<div style="float: left; width: 33%;">
+			 				<h3>Filters</h3>
 								<?php 
 								$store_taxonomies = get_object_taxonomies( 'go_store' );
 								$store_taxonomy_terms = get_terms( $store_taxonomies );
@@ -458,41 +461,41 @@ if ( is_admin() ) {
 												<?php
 												$count++;
 											}
-											?>
-										 
+											?>				 
 											<input type='checkbox' value='<?php echo esc_attr( $taxonomy_term->name ); ?>' class='go_store_tax_filter' tax='<?php echo esc_attr( $taxonomy_term->taxonomy ); ?>' name='go_export_store_tax[<?php echo esc_attr( $taxonomy_data->label ); ?>]' post_type='go_store'/><?php echo $taxonomy_term->name; ?><br />
 											<?php
+											}
 										}
 									}
-								}
 								?>
-							</div>
 						</div>
-						<div id='go_store_filtered_wrap' class='go_share_wrap'>
-							<h3>Filtered List</h3><div id='go_store_filtered' post_type='go_store'></div>
-						</div>
-					</div>
+	 					<div style="float: left; width: 33%;"><h3>Filtered List</h3></div>
+	 				</div>
+ 	 				<br style="clear: left;"/>
 					<div id='go_share_buttons' class='go_share_wrap'>
+						</br>
 						<button onclick='go_export_data()' >Export</button>
 						<button onclick='go_import_data()' >Import</button>
+						</br>
+						</br>
 						<input id='go_import_upload' name='go_import_file'type='file' />
 					</div>
-                </div><br />
+                <br />
 			<input type="submit" name="Submit" value="Save Options" />
 			<input type="hidden" name="action" value="update" />
 			<input type="hidden" name="page_options" value="go_tasks_name, go_tasks_plural_name, go_first_stage_name, go_second_stage_name, go_third_stage_name, go_fourth_stage_name, go_fifth_stage_name, go_abandon_stage_button, go_second_stage_button, go_third_stage_button, go_fourth_stage_button, go_fifth_stage_button, go_store_name, go_task_loot_name, go_bonus_loot_name, go_points_name, go_points_prefix, go_points_suffix, go_currency_name, go_currency_prefix, go_currency_suffix, go_bonus_currency_name, go_bonus_currency_prefix, go_bonus_currency_suffix, go_penalty_name, go_penalty_prefix, go_penalty_suffix, go_minutes_name, go_minutes_prefix, go_minutes_suffix, go_level_names, go_level_plural_names, go_organization_name, go_class_a_name, go_class_b_name, go_focus_name, go_stats_name, go_inventory_name, go_badges_name, go_leaderboard_name, go_presets, go_admin_bar_display_switch, go_admin_bar_user_redirect, go_admin_bar_add_switch, go_admin_bar_add_minutes_switch, go_ranks, go_class_a, go_class_b, go_focus_switch, go_focus, go_admin_email, go_video_width, go_video_height, go_store_receipt_switch, go_full_student_name_switch, go_multiplier_switch, go_multiplier_threshold, go_penalty_switch, go_penalty_threshold, go_multiplier_percentage, go_data_reset_switch"/>
         </form>
-        </div>
         <?php	
 	}
 
 }
 
+
 add_action( 'admin_menu', 'add_game_on_options' );
+
 function add_game_on_options () {  
     add_menu_page   ( 'Game On', 'Game On', 'manage_options', 'game-on-options.php','game_on_options', plugins_url( 'images/ico.png' , __FILE__ ), '81' );  
 	add_submenu_page( 'game-on-options.php', 'Options', 'Options', 'manage_options', 'game-on-options.php', 'game_on_options' );
-
 }
 
 function go_reset_levels () {
@@ -841,7 +844,6 @@ function go_extra_profile_fields ( $user ) { ?>
 		}
     </script>
 <?php
-
 }
 
 add_action( 'personal_options_update', 'go_save_extra_profile_fields' );
@@ -975,8 +977,7 @@ function go_export () {
 		'xml' => $xml
 	);
 	echo json_encode( $xml_info  );
-	
-	
+
 	die();
 }
 
@@ -984,11 +985,8 @@ function go_filtered_export_list () {
 	$filters = array_filter( $_POST['export_filters'] );
 	$post_type = $_POST['post_type'];
 	$already_displayed_posts = array();
-	
 	foreach ( $filters as $taxonomy => $terms ) {
-		
 		$terms = array_filter( $terms );
-		
 		$args = array(
 			'post_type' => $post_type,
 			'tax_query' => array(
@@ -1000,7 +998,6 @@ function go_filtered_export_list () {
 			),
 			'posts_per_page' => -1
 		);
-		
 		$filtered_posts = get_posts( $args );
 		foreach ( $filtered_posts as $filtered_post ) {
 			if ( ! in_array( $filtered_post->ID, $already_displayed_posts ) ) {

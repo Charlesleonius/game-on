@@ -1,16 +1,4 @@
-.go_wrap {
-	background-color: white;	
-	padding: 10px;
-}
 
-.go_wrap form {
-	height: 100%;
-}
-
-.go_wrap input[type="text"] {
-   height: 20px;
-   font-size: 14px;
-}
 
 input.go_options_additional_settings_input { 
    width: 15px;
@@ -233,9 +221,15 @@ input[type="submit"] {
 .go_options_preset_currency_input {
 	width: 17%;
 }
+
+.go_add_preset {
+	margin-right:  5px;
+}
+
 /****************************/
 
-/** Levels Styles**/
+/** Levels Styles **/
+
 #go_options_level_names_wrap, 
 #go_options_level_points_wrap, 
 #go_options_level_badges_wrap {
@@ -268,6 +262,10 @@ input[type="submit"] {
 	
 }
 
+.go_add_level {
+	margin-right: 5px;
+}
+
 /****************************/
 
 /** Seating Chart Styles **/
@@ -293,6 +291,10 @@ input[type="submit"] {
 	width: auto;
 }
 
+.go_add_period, .go_add_computer {
+	margin-right: 5px;
+}
+
 /****************************/
 
 /** Profession Styles **/
@@ -313,6 +315,10 @@ input[type="submit"] {
 
 .go_options_profession_input {
 	width: 50%;
+}
+
+.go_add_profession {
+	margin-left: 5px;
 }
 
 /****************************/
@@ -356,10 +362,36 @@ input[type="submit"] {
 
 /** Export/Import Styles **/
 
+.go_wrap {
+	background-color: white;	
+	padding: 10px;
+}
+
+.go_tasks_filters_wrap {
+	margin-top: 40px;
+}
+
+.go_share_wrap:first-of-type {
+    margin-top: 0px;
+}
+
+.go_wrap form {
+	height: 100%;
+}
+
+.go_wrap input[type="text"] {
+   height: 20px;
+   font-size: 14px;
+}
+
 #go_share_wrap {
 	margin-bottom: 4px !important;
 	margin-left: 40px !important;	
 	width: 100%;
+}
+
+.go_share_headers {
+	border-bottom: 1px solid rgb(221, 221, 221);
 }
 
 .go_share_wrap {
@@ -373,8 +405,7 @@ input[type="submit"] {
 }
 
 #go_share_tasks {
-	padding-bottom: 10px;
-	border-bottom: 1px solid rgb(221, 221, 221);
+	padding-bottom: 30px;
 }
 
 #go_share_store {
