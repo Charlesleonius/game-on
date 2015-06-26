@@ -409,7 +409,6 @@ if ( is_admin() ) {
                                             $taxonomy_data = get_taxonomy( $taxonomy );
                                             if ( $count == 1 ) {
                                                 ?>
-                                                <h4><?php echo $taxonomy_data->label; ?></h4>
                                                 <input type='checkbox' name='go_export_task_tax[<?php echo esc_attr( $taxonomy_data->label ); ?>]' class='go_task_tax_filter' value='all' post_type='tasks'/>All<br />
                                                 <?php
                                                 $count++;
@@ -456,7 +455,7 @@ if ( is_admin() ) {
 											$taxonomy_data = get_taxonomy( $taxonomy );
 											if ( $count == 1 ) {
 												?>
-												<h4><?php echo $taxonomy_data->label; ?></h4>
+												
 												<input type='checkbox' name='go_export_store_tax[<?php echo esc_attr( $taxonomy_data->label ); ?>]' class='go_store_tax_filter' value='all' post_type='go_store'/> All<br />
 												<?php
 												$count++;
