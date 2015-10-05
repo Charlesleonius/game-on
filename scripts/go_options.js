@@ -252,6 +252,11 @@ jQuery( document ).ready( function() {
 		jQuery( 'input[name="go_admin_bar_add_currency_switch"]' ).parent().show( 'slow' );
 		jQuery( 'input[name="go_admin_bar_add_bonus_currency_switch"]' ).parent().show( 'slow' );
 		jQuery( 'input[name="go_admin_bar_add_penalty_switch"]' ).parent().show( 'slow' );
+		jQuery( 'input[name="go_bar_add_minutes_switch"]' ).parent().show( 'slow' )
+		jQuery( 'input[name="go_bar_add_points_switch"]' ).parent().show( 'slow' );
+		jQuery( 'input[name="go_bar_add_currency_switch"]' ).parent().show( 'slow' );
+		jQuery( 'input[name="go_bar_add_bonus_currency_switch"]' ).parent().show( 'slow' );
+		jQuery( 'input[name="go_bar_add_penalty_switch"]' ).parent().show( 'slow' );
 	} else {
 		jQuery( '#admin_bar_catagories' ).hide( 'slow' );
 		jQuery( 'input[name="go_admin_bar_add_minutes_switch"]' ).parent().hide( 'slow' );
@@ -259,6 +264,11 @@ jQuery( document ).ready( function() {
 		jQuery( 'input[name="go_admin_bar_add_currency_switch"]' ).parent().hide( 'slow' );
 		jQuery( 'input[name="go_admin_bar_add_bonus_currency_switch"]' ).parent().hide( 'slow' );
 		jQuery( 'input[name="go_admin_bar_add_penalty_switch"]' ).parent().hide( 'slow' );
+		jQuery( 'input[name="go_bar_add_minutes_switch"]' ).parent().hide( 'slow' );
+		jQuery( 'input[name="go_bar_add_points_switch"]' ).parent().hide( 'slow' );
+		jQuery( 'input[name="go_bar_add_currency_switch"]' ).parent().hide( 'slow' );
+		jQuery( 'input[name="go_bar_add_bonus_currency_switch"]' ).parent().hide( 'slow' );
+		jQuery( 'input[name="go_bar_add_penalty_switch"]' ).parent().hide( 'slow' );
 	}
 	
 	jQuery( 'input[name="go_admin_bar_add_switch"]' ).click( function() {
