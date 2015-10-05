@@ -182,7 +182,7 @@ if ( is_admin() ) {
 					go_options_input( 'User Redirect', 'checkbox', 'go_admin_bar_user_redirect', 'http://maclab.guhsd.net/go/video/options/userRedirect.mp4', 'Send users to home page after login (recommended)' );
 					go_options_input( 'Add Switch', 'checkbox', 'go_admin_bar_add_switch', 'http://maclab.guhsd.net/go/video/options/adminBarAddSwitch.mp4', 'Activate the manual scoring system (not recommended)' );
 					?>
-					<strong>Admin</strong>
+					<div id ="admin_bar_catagories"><strong>Admin</strong>
 					<?php
 					go_options_input( go_return_options( 'go_points_name' ), 'checkbox', 'go_admin_bar_add_points_switch', '', 'Enable ' . go_return_options( 'go_points_name' ) . ' in the add bar' );
 					go_options_input( go_return_options( 'go_currency_name' ), 'checkbox', 'go_admin_bar_add_currency_switch', 'http://maclab.guhsd.net/go/video/options/adminBarAddMinutesOnly.mp4', 'Enable ' . go_return_options( 'go_currency_name' ) . ' in the add bar' );
@@ -190,7 +190,7 @@ if ( is_admin() ) {
 					go_options_input( go_return_options( 'go_penalty_name' ), 'checkbox', 'go_admin_bar_add_penalty_switch', 'http://maclab.guhsd.net/go/video/options/adminBarAddMinutesOnly.mp4', 'Enable ' . go_return_options( 'go_penalty_name' ) . ' in the add bar'  );
 					go_options_input( go_return_options( 'go_minutes_name' ), 'checkbox', 'go_admin_bar_add_minutes_switch', 'http://maclab.guhsd.net/go/video/options/adminBarAddMinutesOnly.mp4', 'Enable ' . go_return_options( 'go_minutes_name' ) . ' in the add bar'  );
 					?>
-					<strong>User</strong>
+					<strong>User</strong></div>
 					<?php
 					go_options_input( go_return_options( 'go_points_name' ), 'checkbox', 'go_bar_add_points_switch', '', 'Enable ' . go_return_options( 'go_points_name' ) . ' in the add bar' );
 					go_options_input( go_return_options( 'go_currency_name' ), 'checkbox', 'go_bar_add_currency_switch', 'http://maclab.guhsd.net/go/video/options/adminBarAddMinutesOnly.mp4', 'Enable ' . go_return_options( 'go_currency_name' ) . ' in the add bar' );
