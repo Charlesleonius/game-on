@@ -26,6 +26,43 @@
 	border-radius: 3px;
 }
 
+#go_stats_username {
+	font-size: 50px;	
+}
+
+#go_stats_boxes {
+	float: left;
+	width: 100px;
+	padding: 5px 0px 5px 0px !important;
+	margin-top: 7px;
+	text-align: center;
+	font-size: 15px;
+	font-weight: bold;
+	color: white;
+	margin-right: 5px !important;
+	-webkit-border-radius: 5px;
+	-moz-border-radius: 10px;
+	border-radius: 5px;
+	background-color:#7FDBFF;
+	font-weight: bold;
+}
+
+#go_stats_tab_boxes {
+	width: 130px;
+	padding: 5px 0px 5px 0px !important;
+	margin-top: 7px;
+	text-align: center;
+	font-size: 15px;
+	font-weight: bold;
+	color: white;
+	margin-right: 5px !important;
+	-webkit-border-radius: 5px;
+	-moz-border-radius: 10px;
+	border-radius: 5px;
+	background-color:#FF4136;
+	font-weight: bold;
+}
+
 #go_stats_lay {
 	height: 100%;
 	width: 100%;
@@ -50,6 +87,8 @@
 	font-family: verdana;
 	border-bottom: 2px solid #BBB;
 	margin-right: 20px;
+	margin-top: 35px;
+	padding-bottom: 10px;
 }
 
 #go_stats_user_info {
@@ -81,7 +120,6 @@
 	height: 25px;
 	border: 2px solid #AAA;
 	top: 14px;
-	margin-right: 40px;
 }
 
 #go_stats_progress_text_wrap {
@@ -113,14 +151,28 @@
 	top: 18px;
 }
 
+#go_stats_user_progress_top_value {
+	font-size: 15px;
+	font-weight: bold;
+	color: white;
+}
+
+#go_stats_user_progress_bottom_value {
+	font-size: 15px;
+	font-weight: bold;
+	color: white;
+}
+
 #go_stats_user_focuses {
 	height: auto;
 	font-size: 24px;
 	clear: right;
-	top: 22px;
+	top: 30px;
+	margin-bottom: 10px;
 }
 
 #go_stats_user_tabs {
+	margin-top: 22px;
 	display: inline-block;
 	float: right;
 	clear: both;
@@ -132,9 +184,6 @@
 	color: inherit;
 }
 
-#go_stats_admin_help {
-	color: #FF0000 !important;	
-}
 
 #go_stats_body {
 	position: relative;

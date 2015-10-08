@@ -50,52 +50,63 @@ function go_admin_bar_stats() {
 		<div id='go_stats_gravatar'><?php echo $user_avatar; ?></div>
 		<div id='go_stats_header'>
 			<div id='go_stats_user_info'>
-				<?php echo "{$user_fullname}<br/>{$user_login}<br/><a href='{$user_website}' target='_blank'>{$user_display_name}</a><br/><div id='go_stats_user_points'><span id='go_stats_user_points_value'>{$current_points}</span> {$points_name}</div><div id='go_stats_user_currency'><span id='go_stats_user_currency_value'>{$current_currency}</span> {$currency_name}</div><div id='go_stats_user_bonus_currency'><span id='go_stats_user_bonus_currency_value'>{$current_bonus_currency}</span> {$bonus_currency_name}</div>{$current_penalty} {$penalty_name}<br/>{$current_minutes} {$minutes_name}"; ?>
+				<?php 
+				echo "<br/><div id='go_stats_username'>{$user_login}'s Stats</div><br/><br/>";
+				echo "<div id='go_stats_boxes'>{$current_points}<br/>{$points_name}</div>";
+				echo "<div id='go_stats_boxes'>{$current_currency}<br/>{$currency_name}</div>";
+				echo "<div id='go_stats_boxes'>{$current_bonus_currency}<br/>{$bonus_currency_name}</div>";
+				echo "<div id='go_stats_boxes'>{$current_penalty}<br/>{$penalty_name}</div>";
+				echo "<div id='go_stats_boxes'>{$current_minutes}<br/>{$minutes_name}</div>";
+				?>
 			</div>
 			<div id='go_stats_user_rank'><?php echo $current_rank; ?></div>
-			<div id='go_stats_user_progress'>
-				<div id="go_stats_progress_text_wrap">
-					<div id='go_stats_progress_text'><?php echo "<span id='go_stats_user_progress_top_value'>{$display_current_rank_points}</span>/<span id='go_stats_user_progress_bottom_value'>{$display_next_rank_points}</span>"; ?></div>
-				</div>
-				<div id='go_stats_progress_fill' style='width: <?php echo $percentage_of_level; ?>%;<?php $color = barColor( $current_bonus_currency, $current_penalty ); echo "background-color: {$color}";if ( $percentage_of_level >= 98 ) { echo "border-radius: 15px"; } ?>'></div>
-			</div>
+			
             <?php if ( go_return_options( 'go_focus_switch' ) == 'On' ) {?>
             <div id='go_stats_user_focuses'><?php echo ( ( ! empty( $user_focuses) ) ? $user_focuses : '' ); ?></div>
             <?php } ?>
-			<div id='go_stats_user_tabs'>
+            <br/><br/><br/>
+            <div id='go_stats_user_progress'>
+				<div id="go_stats_progress_text_wrap">
+					<div id='go_stats_progress_text'><?php echo "<span id='go_stats_user_progress_top_value'>{$display_current_rank_points}/</span><span id='go_stats_user_progress_bottom_value'>{$display_next_rank_points}</span>"; ?></div>
+				</div>
+				<div id='go_stats_progress_fill' style='width: <?php echo $percentage_of_level; ?>%;<?php $color = barColor( $current_bonus_currency, $current_penalty ); echo "background-color: {$color}";if ( $percentage_of_level >= 98 ) { echo "border-radius: 15px"; } ?>'></div>
+			</div>
+		</div>
+		<div id='go_stats_user_tabs'>
             <!--
 				<a href='javascript:;' id="go_stats_body_progress" class='go_stats_body_selectors' tab='progress'>
 					WEEKLY PROGRESS
 				</a> | 
             -->
             	<?php $is_admin = current_user_can( 'manage_options' ); if ( $is_admin ) { ?>
-               		<a href='javascript:;' id='go_stats_admin_help' class='go_stats_body_selectors' tab='help'>
+            	<div style="margin-left:20px;">
+               		<div id='go_stats_tab_boxes'><a href='javascript:;' id='go_stats_admin_help' class='go_stats_body_selectors' tab='help'>
                     	HELP
-                    </a> |
+                    </a></div>
                 <?php } ?>
-				<a href='javascript:;' id="go_stats_body_tasks" class='go_stats_body_selectors' tab='tasks'>
+				<div id='go_stats_tab_boxes'><a href='javascript:;' id="go_stats_body_tasks" class='go_stats_body_selectors' tab='tasks'>
 					<?php echo strtoupper( go_return_options( 'go_tasks_plural_name' ) ); ?>
-				</a> | 
-				<a href='javascript:;' id="go_stats_body_items" class='go_stats_body_selectors' tab='items'>
+				</a></div>
+				<div id='go_stats_tab_boxes'><a href='javascript:;' id="go_stats_body_items" class='go_stats_body_selectors' tab='items'>
 					<?php echo strtoupper( go_return_options( 'go_inventory_name' ) ); ?>
-				</a> | 
-				<a href='javascript:;' id="go_stats_body_rewards" class='go_stats_body_selectors' tab='rewards'>
+				</a></div>
+				<div id='go_stats_tab_boxes'><a href='javascript:;' id="go_stats_body_rewards" class='go_stats_body_selectors' tab='rewards'>
 					REWARDS
-				</a> | 
-				<a href='javascript:;' id="go_stats_body_minutes" class='go_stats_body_selectors' tab='minutes'>
+				</a></div>
+				<div id='go_stats_tab_boxes'><a href='javascript:;' id="go_stats_body_minutes" class='go_stats_body_selectors' tab='minutes'>
 					<?php echo strtoupper( $minutes_name ); ?>
-				</a> |
-				<a href='javascript:;' id="go_stats_body_penalties" class='go_stats_body_selectors' tab='penalties'>
+				</a></div>
+				<div id='go_stats_tab_boxes'><a href='javascript:;' id="go_stats_body_penalties" class='go_stats_body_selectors' tab='penalties'>
 					<?php echo strtoupper( $penalty_name ) ?>
-				</a> | 
-				<a href='javascript:;' id="go_stats_body_badges" class='go_stats_body_selectors' tab='badges'>
+				</a></div>
+				<div id='go_stats_tab_boxes'><a href='javascript:;' id="go_stats_body_badges" class='go_stats_body_selectors' tab='badges'>
 					<?php echo strtoupper( go_return_options( 'go_badges_name' ) ); ?>
-				</a> | 
-				<a href='javascript:;' id="go_stats_body_leaderboard" class='go_stats_body_selectors' tab='leaderboard'>
+				</a></div>
+				<div id='go_stats_tab_boxes'><a href='javascript:;' id="go_stats_body_leaderboard" class='go_stats_body_selectors' tab='leaderboard'>
 					<?php echo strtoupper( go_return_options( 'go_leaderboard_name' ) ); ?>
-				</a>
+				</a></div>
+				</div>
 			</div>
-		</div>
 		<div id='go_stats_body'></div>
 	</div>
 	<?php 
