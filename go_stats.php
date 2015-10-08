@@ -115,6 +115,8 @@ function go_stats_task_list() {
 	$task_list = $wpdb->get_results( $wpdb->prepare( "SELECT status, post_id, count, url FROM {$go_table_name} WHERE uid=%d AND (status = %d OR status = 2 OR status = 3 OR status = 4) ORDER BY id DESC", $user_id, 1 ) );
 	$counter = 1;
 	?>
+	<input type="checkbox" class="go_timetamp_selector">Show Timestamps</input>
+	<br></br>
 	<ul id='go_stats_tasks_list' <?php if ( $is_admin ) { echo "class='go_stats_tasks_list_admin'"; } ?>>
 		<?php
 		foreach ( $task_list as $task ) {
@@ -264,7 +266,7 @@ function go_stats_task_list() {
 								( ! empty( $link_stage_url ) ? 'target="_blank"' : '' ).">
 							<div class='{$div_class_list_str}' title='{$div_title_str}' task='{$task->post_id}' stage='{$i}' ".
 									( ! empty( $div_count_str ) ? "count='{$div_count_str}'>{$div_count_str}" : '>' ).
-								"<p>{$div_timestamp_date_str}</p>
+								"<div class='task_timestamp'>{$div_timestamp_date_str}</div>
 							</div>
 						</a>
 					";

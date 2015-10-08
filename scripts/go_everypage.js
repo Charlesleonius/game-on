@@ -289,6 +289,16 @@ function go_stats_task_list() {
 		},
 		success:function( html ) {
 			jQuery( '#go_stats_body' ).html( html );
+			jQuery(".task_timestamp").hide();
+			jQuery( '.go_timetamp_selector' ).click( function() {
+				jQuery( '.go_timetamp_selector' ).each( function() {
+					if ( jQuery( this ).prop( 'checked' ) ) {
+						jQuery(".task_timestamp").show("slow");
+					} else {
+						jQuery(".task_timestamp").hide("slow");
+					}
+				});
+			});
 			jQuery( '.go_stats_task_status_wrap a.go_stats_task_admin_stage_wrap' ).click( function() {
 				if ( '#' == jQuery( this ).attr( 'href' ) ) {
 					jQuery( '.chosen' ).not( jQuery( this ).children( 'div' ) ).removeClass( 'chosen' );
