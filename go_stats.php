@@ -71,18 +71,12 @@ function go_admin_bar_stats() {
 				</div>
 				<div id='go_stats_progress_fill' style='width: <?php echo $percentage_of_level; ?>%;<?php $color = barColor( $current_bonus_currency, $current_penalty ); echo "background-color: {$color}";if ( $percentage_of_level >= 98 ) { echo "border-radius: 15px"; } ?>'></div>
 			</div>
-		</div>
-		<div id='go_stats_user_tabs'>
-            <!--
-				<a href='javascript:;' id="go_stats_body_progress" class='go_stats_body_selectors' tab='progress'>
-					WEEKLY PROGRESS
-				</a> | 
-            -->
-            	<?php $is_admin = current_user_can( 'manage_options' ); if ( $is_admin ) { ?>
-            	<div style="margin-left:20px;">
-               		<div id='go_stats_tab_boxes'><a href='javascript:;' id='go_stats_admin_help' class='go_stats_body_selectors' tab='help'>
-                    	HELP
-                    </a></div>
+			<div id='go_stats_user_tabs'>
+           <?php $is_admin = current_user_can( 'manage_options' ); if ( $is_admin ) { ?>
+            <div style="margin-left:20px;">
+            	<div id='go_stats_tab_boxes'><a href='javascript:;' id='go_stats_admin_help' class='go_stats_body_selectors' tab='help'>
+            		HELP
+            	</a></div>
                 <?php } ?>
 				<div id='go_stats_tab_boxes'><a href='javascript:;' id="go_stats_body_tasks" class='go_stats_body_selectors' tab='tasks'>
 					<?php echo strtoupper( go_return_options( 'go_tasks_plural_name' ) ); ?>
@@ -105,8 +99,10 @@ function go_admin_bar_stats() {
 				<div id='go_stats_tab_boxes'><a href='javascript:;' id="go_stats_body_leaderboard" class='go_stats_body_selectors' tab='leaderboard'>
 					<?php echo strtoupper( go_return_options( 'go_leaderboard_name' ) ); ?>
 				</a></div>
-				</div>
 			</div>
+		</div>
+		</div>
+		
 		<div id='go_stats_body'></div>
 	</div>
 	<?php 

@@ -34,12 +34,11 @@
 	float: left;
 	width: 100px;
 	padding: 5px 0px 5px 0px !important;
-	margin-top: 7px;
 	text-align: center;
 	font-size: 15px;
 	font-weight: bold;
 	color: white;
-	margin-right: 5px !important;
+	margin-right: 9px !important;
 	-webkit-border-radius: 5px;
 	-moz-border-radius: 10px;
 	border-radius: 5px;
@@ -55,12 +54,13 @@
 	font-size: 15px;
 	font-weight: bold;
 	color: white;
-	margin-right: 5px !important;
+	margin-right: 8px !important;
 	-webkit-border-radius: 5px;
 	-moz-border-radius: 10px;
 	border-radius: 5px;
 	background-color:#FF4136;
 	font-weight: bold;
+	float: left;
 }
 
 #go_stats_lay {
@@ -79,6 +79,8 @@
 	float: left;
 	position: relative;
 	margin: 0px 10px 0px 20px;
+	top: 27px;
+	left: 10px;
 }
 
 #go_stats_header {
@@ -87,7 +89,7 @@
 	font-family: verdana;
 	border-bottom: 2px solid #BBB;
 	margin-right: 20px;
-	margin-top: 35px;
+	
 	padding-bottom: 10px;
 }
 
@@ -96,6 +98,7 @@
 	float: left;
 	font-size: 16px;
 	line-height: 18px;
+	margin-left: 25px;
 }
 
 #go_stats_user_info div {
@@ -120,6 +123,7 @@
 	height: 25px;
 	border: 2px solid #AAA;
 	top: 14px;
+	margin-right: 10px;
 }
 
 #go_stats_progress_text_wrap {
@@ -149,6 +153,7 @@
 	font-weight: bold;
 	vertical-align: middle;
 	top: 18px;
+	margin-right: 10px;
 }
 
 #go_stats_user_progress_top_value {
@@ -169,6 +174,7 @@
 	clear: right;
 	top: 30px;
 	margin-bottom: 10px;
+	margin-right: 10px;
 }
 
 #go_stats_user_tabs {
