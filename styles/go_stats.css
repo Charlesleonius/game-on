@@ -20,7 +20,8 @@
 	width: 80%;
 	height: 80%;
 	padding: 16px;
-	background-color: white;
+	background-color: #23282d;
+	color: white;
 	z-index: 999999;
 	overflow: auto;
 	border-radius: 3px;
@@ -30,41 +31,74 @@
 	font-size: 50px;	
 }
 
+.clear {
+    clear:both;
+}
+
 #go_stats_boxes {
-	float: left;
-	width: 100px;
+	width: 165px;
 	padding: 5px 0px 5px 0px !important;
 	text-align: center;
-	font-size: 15px;
-	font-weight: bold;
+	font-size: 100%;
 	color: white;
-	margin-right: 9px !important;
-	-webkit-border-radius: 5px;
-	-moz-border-radius: 10px;
-	border-radius: 5px;
 	background-color:#7FDBFF;
 	font-weight: bold;
+	display: inline-block;
+}
+
+#go_stats {
+	width: calc(100% - 330px);
+	display: inline-block;
+	font-size: 14px;
+	text-align: justify;
+}
+
+#go_stats_level_box {
+	width: 165px;
+	height: 165px;
+	padding: 5px 0px 5px 0px !important;
+	text-align: center;
+	font-size: 100%;
+	color: white;
+	background-color:#7FDBFF;
+	font-weight: bold;
+	display: inline-block;
+	float: right;
 }
 
 #go_stats_tab_boxes {
-	width: 130px;
+	width: 165px;
 	padding: 5px 0px 5px 0px !important;
-	margin-top: 7px;
 	text-align: center;
 	font-size: 15px;
 	font-weight: bold;
 	color: white;
-	margin-right: 8px !important;
-	-webkit-border-radius: 5px;
-	-moz-border-radius: 10px;
-	border-radius: 5px;
 	background-color:#FF4136;
 	font-weight: bold;
-	float: left;
+	display: inline-block;
+	margin-top: 1%;
+}
+
+#go_stats_user_tabs {
+	width: 100%;
+	display: inline-block;
+	font-size: 14px;
+	text-align: justify;
+}
+
+.stretch {
+    width: 100%;
+    display: inline-block;
+    font-size: 0;
+    line-height: 0
+}
+
+#go_stats_user_tabs a {
+	text-decoration: none;
+	color: inherit;
 }
 
 #go_stats_lay {
-	height: 100%;
 	width: 100%;
 	overflow: hidden;
 }
@@ -73,24 +107,19 @@
 
 #go_stats_gravatar {
 	display: inline-block;
-	width: 161px;
 	height: 161px;
 	border: 2px solid #BBB;
 	float: left;
 	position: relative;
-	margin: 0px 10px 0px 20px;
-	top: 27px;
-	left: 10px;
 }
 
 #go_stats_header {
 	position: relative;
 	overflow: hidden;
-	font-family: verdana;
-	border-bottom: 2px solid #BBB;
-	margin-right: 20px;
-	
-	padding-bottom: 10px;
+	font-family: verdana; 
+	height: 161px;
+	display: inline-block;
+	width: 100%;
 }
 
 #go_stats_user_info {
@@ -119,11 +148,10 @@
 }
 
 #go_stats_user_progress {
-	width: 25%;
+	width: calc(100% - 334px);
 	height: 25px;
-	border: 2px solid #AAA;
-	top: 14px;
-	margin-right: 10px;
+	border: 2px solid white;
+	float: left;
 }
 
 #go_stats_progress_text_wrap {
@@ -177,28 +205,15 @@
 	margin-right: 10px;
 }
 
-#go_stats_user_tabs {
-	margin-top: 22px;
-	display: inline-block;
-	float: right;
-	clear: both;
-	font-size: 14px;
-}
-
-#go_stats_user_tabs a {
-	text-decoration: none;
-	color: inherit;
-}
-
-
 #go_stats_body {
 	position: relative;
 	height: 70%;
-	margin: 25px 20px 0px 20px;
+	
 	font-size: 13px;
 	font-family: verdana;
 	white-space: nowrap;
 	overflow: hidden;
+	background-color: #23282d !important;
 }
 
 #go_stats_body a {
